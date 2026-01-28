@@ -1,0 +1,1499 @@
+global:
+  daily_nb_rows_per_group: 500
+  noise_per_population: 0.05
+  target_noise_scale: 0.2
+  ratio_churn: 0.03
+  ratio_sport: 0.04
+  ratio_cinema: 0.04
+  groups:
+    requests: 
+      cols: ['CUST_NUM', 'date', 'churn_target', 'sport_target', 'cinema_target']
+    socio_demo:
+      cols: ['CUST_NUM', 'date', 'CUST_AGE']
+    internet:
+      cols: ['CUST_NUM', 'date', 'TRAF_SOCIAL_MEDIA_L3M', 'TRAF_TELCO_L3M', 'TRAF_GAMING_L3M', 'TRAF_PRICE_COMPARATOR_L3M', 'TRAF_KIDS_L3M', 'TRAF_CYCLING_L12M', 'TRAF_FOOTBALL_L12M', 'TRAF_DISNEY_L3M', 'TRAF_NETFLIX_L3M', 'NB_DAYS_INTERNET_LINE']
+    tv:
+      cols: ['CUST_NUM', 'date', 'TV_USAGE_L1M', 'NB_DAYS_TV_LINE', 'TV_FOOTBALL_L12M', 'TV_CYCLING_L12M', 'TV_DOCUMENTARIES_L12M', 'TV_MOVIES_L12M', 'TV_CULTURE_L12M', 'TV_NB_DISINCT_SPORTS_VIEWED_L12M']
+    mobile:
+      cols: ['CUST_NUM', 'date', 'OUT_OF_BUNDLE_L3M', 'NB_MOBILE_SUBS']
+    journeys: 
+      cols: ['CUST_NUM', 'date', 'NB_COMPLAINTS_L3M', 'NB_TECHNICAL_ISSUES_L3M', 'NB_ADMINISTRATIVE_ISSUES_L3M']
+
+
+storage:
+  storage_account_name: "blobstoragehandson"
+  container_name: "next-best-offer"
+  main_path: "data_generation"
+  storage_account_key: "x"
+
+
+target_definition:
+  sport_bundle:
+    CUST_AGE: 0
+    TRAF_SOCIAL_MEDIA_L3M: 0.1
+    TRAF_TELCO_L3M: 0
+    TRAF_PRICE_COMPARATOR_L3M: -0.2
+    NB_DAYS_INTERNET_LINE: 0
+    NB_COMPLAINTS_L3M: -0.2
+    NB_TECHNICAL_ISSUES_L3M: -0.2
+    NB_ADMINISTRATIVE_ISSUES_L3M: -0.2
+    OUT_OF_BUNDLE_L3M: 0
+    NB_MOBILE_SUBS: 0
+    TV_USAGE_L1M: 0.1
+    NB_DAYS_TV_LINE: 0
+    TRAF_KIDS_L3M: 0.2
+    TRAF_GAMING_L3M: 0
+    TRAF_NETFLIX_L3M: 0
+    TRAF_DISNEY_L3M: 0
+    TRAF_FOOTBALL_L12M: 0.2
+    TRAF_CYCLING_L12M: 0.2
+    TV_FOOTBALL_L12M: 0.2
+    TV_CYCLING_L12M: 0.2
+    TV_DOCUMENTARIES_L12M: 0
+    TV_MOVIES_L12M: 0
+    TV_CULTURE_L12M: -0.1
+    TV_NB_DISINCT_SPORTS_VIEWED_L12M: 0.4
+
+  churn:
+    CUST_AGE: 0
+    TRAF_SOCIAL_MEDIA_L3M: 0
+    TRAF_TELCO_L3M: 0.5
+    TRAF_PRICE_COMPARATOR_L3M: 0.9
+    NB_DAYS_INTERNET_LINE: -0.1
+    NB_COMPLAINTS_L3M: 0.7
+    NB_TECHNICAL_ISSUES_L3M: 0.7
+    NB_ADMINISTRATIVE_ISSUES_L3M: 0.6
+    OUT_OF_BUNDLE_L3M: 0.3
+    NB_MOBILE_SUBS: 0
+    TV_USAGE_L1M: 0
+    NB_DAYS_TV_LINE: 0
+    TRAF_KIDS_L3M: 0
+    TRAF_GAMING_L3M: 0.6
+    TRAF_NETFLIX_L3M: 0.1
+    TRAF_DISNEY_L3M: 0
+    TRAF_FOOTBALL_L12M: 0
+    TRAF_CYCLING_L12M: 0
+    TV_FOOTBALL_L12M: 0
+    TV_CYCLING_L12M: 0
+    TV_DOCUMENTARIES_L12M: -0.1
+    TV_MOVIES_L12M: 0
+    TV_CULTURE_L12M: 0
+    TV_NB_DISINCT_SPORTS_VIEWED_L12M: 0
+
+  cinema_bundle:
+    CUST_AGE: 0
+    TRAF_SOCIAL_MEDIA_L3M: 0
+    TRAF_TELCO_L3M: 0
+    TRAF_PRICE_COMPARATOR_L3M: -0.2
+    NB_DAYS_INTERNET_LINE: 0
+    NB_COMPLAINTS_L3M: -0.2
+    NB_TECHNICAL_ISSUES_L3M: -0.2
+    NB_ADMINISTRATIVE_ISSUES_L3M: -0.2
+    OUT_OF_BUNDLE_L3M: 0
+    NB_MOBILE_SUBS: 0
+    TV_USAGE_L1M: 0.1
+    NB_DAYS_TV_LINE: 0
+    TRAF_KIDS_L3M: 0.2
+    TRAF_GAMING_L3M: 0
+    TRAF_NETFLIX_L3M: 0.35
+    TRAF_DISNEY_L3M: 0.35
+    TRAF_FOOTBALL_L12M: -0.1
+    TRAF_CYCLING_L12M: 0
+    TV_FOOTBALL_L12M: 0
+    TV_CYCLING_L12M: 0
+    TV_DOCUMENTARIES_L12M: 0.35
+    TV_MOVIES_L12M: 0.3
+    TV_CULTURE_L12M: 0.25
+    TV_NB_DISINCT_SPORTS_VIEWED_L12M: -0.1
+
+
+population_distribution:
+
+  churn:
+    # young customers with a lot of out of bundle
+    churn_1:
+      TV_USAGE_L1M:
+        mean: 800
+        std: 400
+        clip: 0
+      OUT_OF_BUNDLE_L3M:
+        mean: 30
+        std: 30
+        clip: 0
+      TRAF_CYCLING_L12M:
+        mean: 0
+        std: 20
+        clip: 0
+      NB_DAYS_TV_LINE:
+        mean: 500
+        std: 100
+        clip: 30
+      NB_COMPLAINTS_L3M:
+        mean: -3
+        std: 8
+        clip: 0
+      NB_DAYS_INTERNET_LINE:
+        mean: 300
+        std: 100
+        clip: 30
+      TV_DOCUMENTARIES_L12M:
+        mean: 40
+        std: 20
+        clip: 0
+      TV_FOOTBALL_L12M:
+        mean: 400
+        std: 200
+        clip: 0
+      TRAF_NETFLIX_L3M:
+        mean: 1200
+        std: 600
+        clip: 0
+      TRAF_FOOTBALL_L12M:
+        mean: 200
+        std: 100
+        clip: 0
+      NB_TECHNICAL_ISSUES_L3M:
+        mean: -1
+        std: 4
+        clip: 0
+      TRAF_TELCO_L3M:
+        mean: 80
+        std: 50
+        clip: 0
+      TRAF_DISNEY_L3M:
+        mean: 1000
+        std: 500
+        clip: 0
+      TV_CULTURE_L12M:
+        mean: 30
+        std: 20
+        clip: 0
+      TRAF_GAMING_L3M:
+        mean: 1100
+        std: 300
+        clip: 0
+      TRAF_PRICE_COMPARATOR_L3M:
+        mean: 20
+        std: 20
+        clip: 0
+      NB_ADMINISTRATIVE_ISSUES_L3M:
+        mean: 0
+        std: 5
+        clip: 0
+      TV_MOVIES_L12M:
+        mean: 600
+        std: 400
+        clip: 0
+      TRAF_SOCIAL_MEDIA_L3M:
+        mean: 1200
+        std: 300
+        clip: 0
+      NB_MOBILE_SUBS:
+        mean: 1
+        std: 3
+        clip: 0
+      TV_CYCLING_L12M:
+        mean: 20
+        std: 20
+        clip: 0
+      CUST_AGE:
+        mean: 28
+        std: 10
+        clip: 18
+      TV_NB_DISINCT_SPORTS_VIEWED_L12M:
+        mean: 2
+        std: 3
+        clip: 1
+      TRAF_KIDS_L3M:
+        mean: 200
+        std: 200
+        clip: 0
+
+    # medior customer with with performance needs
+    churn_2:
+      TV_USAGE_L1M:
+        mean: 800
+        std: 400
+        clip: 0
+      OUT_OF_BUNDLE_L3M:
+        mean: 10
+        std: 30
+        clip: 0
+      TRAF_CYCLING_L12M:
+        mean: 0
+        std: 20
+        clip: 0
+      NB_DAYS_TV_LINE:
+        mean: 300
+        std: 100
+        clip: 30
+      NB_COMPLAINTS_L3M:
+        mean: 0
+        std: 3
+        clip: 0
+      NB_DAYS_INTERNET_LINE:
+        mean: 300
+        std: 100
+        clip: 30
+      TV_DOCUMENTARIES_L12M:
+        mean: 80
+        std: 40
+        clip: 0
+      TV_FOOTBALL_L12M:
+        mean: 200
+        std: 200
+        clip: 0
+      TRAF_NETFLIX_L3M:
+        mean: 1200
+        std: 400
+        clip: 0
+      TRAF_FOOTBALL_L12M:
+        mean: 200
+        std: 100
+        clip: 0
+      NB_TECHNICAL_ISSUES_L3M:
+        mean: 0
+        std: 4
+        clip: 0
+      TRAF_TELCO_L3M:
+        mean: 130
+        std: 50
+        clip: 0
+      TRAF_DISNEY_L3M:
+        mean: 1000
+        std: 500
+        clip: 0
+      TV_CULTURE_L12M:
+        mean: 30
+        std: 20
+        clip: 0
+      TRAF_GAMING_L3M:
+        mean: 800
+        std: 100
+        clip: 0
+      TRAF_PRICE_COMPARATOR_L3M:
+        mean: 80
+        std: 40
+        clip: 0
+      NB_ADMINISTRATIVE_ISSUES_L3M:
+        mean: 0
+        std: 5
+        clip: 0
+      TV_MOVIES_L12M:
+        mean: 600
+        std: 400
+        clip: 0
+      TRAF_SOCIAL_MEDIA_L3M:
+        mean: 800
+        std: 300
+        clip: 0
+      NB_MOBILE_SUBS:
+        mean: 1
+        std: 1
+        clip: 0
+      TV_CYCLING_L12M:
+        mean: 20
+        std: 20
+        clip: 0
+      CUST_AGE:
+        mean: 35
+        std: 15
+        clip: 18
+      TV_NB_DISINCT_SPORTS_VIEWED_L12M:
+        mean: 2
+        std: 3
+        clip: 1
+      TRAF_KIDS_L3M:
+        mean: 200
+        std: 200
+        clip: 0
+
+    # price sensitive customers
+    churn_3:
+      TV_USAGE_L1M:
+        mean: 800
+        std: 500
+        clip: 0
+      OUT_OF_BUNDLE_L3M:
+        mean: -20
+        std: 10
+        clip: 0
+      TRAF_CYCLING_L12M:
+        mean: 0
+        std: 20
+        clip: 0
+      NB_DAYS_TV_LINE:
+        mean: 300
+        std: 100
+        clip: 30
+      NB_COMPLAINTS_L3M:
+        mean: -1
+        std: 3
+        clip: 0
+      NB_DAYS_INTERNET_LINE:
+        mean: 300
+        std: 100
+        clip: 30
+      TV_DOCUMENTARIES_L12M:
+        mean: 80
+        std: 40
+        clip: 0
+      TV_FOOTBALL_L12M:
+        mean: 200
+        std: 200
+        clip: 0
+      TRAF_NETFLIX_L3M:
+        mean: 800
+        std: 400
+        clip: 0
+      TRAF_FOOTBALL_L12M:
+        mean: 250
+        std: 100
+        clip: 0
+      NB_TECHNICAL_ISSUES_L3M:
+        mean: -1
+        std: 4
+        clip: 0
+      TRAF_TELCO_L3M:
+        mean: 200
+        std: 50
+        clip: 0
+      TRAF_DISNEY_L3M:
+        mean: 1000
+        std: 500
+        clip: 0
+      TV_CULTURE_L12M:
+        mean: 30
+        std: 20
+        clip: 0
+      TRAF_GAMING_L3M:
+        mean: 250
+        std: 100
+        clip: 0
+      TRAF_PRICE_COMPARATOR_L3M:
+        mean: 200
+        std: 40
+        clip: 0
+      NB_ADMINISTRATIVE_ISSUES_L3M:
+        mean: 0
+        std: 5
+        clip: 0
+      TV_MOVIES_L12M:
+        mean: 600
+        std: 400
+        clip: 0
+      TRAF_SOCIAL_MEDIA_L3M:
+        mean: 800
+        std: 300
+        clip: 0
+      NB_MOBILE_SUBS:
+        mean: 2
+        std: 1
+        clip: 0
+      TV_CYCLING_L12M:
+        mean: 20
+        std: 20
+        clip: 0
+      CUST_AGE:
+        mean: 55
+        std: 25
+        clip: 18
+      TV_NB_DISINCT_SPORTS_VIEWED_L12M:
+        mean: 2
+        std: 3
+        clip: 1
+      TRAF_KIDS_L3M:
+        mean: 250
+        std: 200
+        clip: 0
+  
+  # senior customers with technical struggles
+    churn_4:
+      TV_USAGE_L1M:
+        mean: 900
+        std: 400
+        clip: 0
+      OUT_OF_BUNDLE_L3M:
+        mean: -20
+        std: 5
+        clip: 0
+      TRAF_CYCLING_L12M:
+        mean: 150
+        std: 50
+        clip: 0
+      NB_DAYS_TV_LINE:
+        mean: 900
+        std: 100
+        clip: 30
+      NB_COMPLAINTS_L3M:
+        mean: 4
+        std: 3
+        clip: 0
+      NB_DAYS_INTERNET_LINE:
+        mean: 1200
+        std: 100
+        clip: 30
+      TV_DOCUMENTARIES_L12M:
+        mean: 200
+        std: 20
+        clip: 0
+      TV_FOOTBALL_L12M:
+        mean: 400
+        std: 200
+        clip: 0
+      TRAF_NETFLIX_L3M:
+        mean: 300
+        std: 100
+        clip: 0
+      TRAF_FOOTBALL_L12M:
+        mean: 200
+        std: 100
+        clip: 0
+      NB_TECHNICAL_ISSUES_L3M:
+        mean: 2
+        std: 5
+        clip: 0
+      TRAF_TELCO_L3M:
+        mean: 120
+        std: 50
+        clip: 0
+      TRAF_DISNEY_L3M:
+        mean: 300
+        std: 200
+        clip: 0
+      TV_CULTURE_L12M:
+        mean: 100
+        std: 50
+        clip: 0
+      TRAF_GAMING_L3M:
+        mean: 100
+        std: 50
+        clip: 0
+      TRAF_PRICE_COMPARATOR_L3M:
+        mean: 30
+        std: 40
+        clip: 0
+      NB_ADMINISTRATIVE_ISSUES_L3M:
+        mean: 2
+        std: 5
+        clip: 0
+      TV_MOVIES_L12M:
+        mean: 800
+        std: 200
+        clip: 0
+      TRAF_SOCIAL_MEDIA_L3M:
+        mean: 100
+        std: 50
+        clip: 0
+      NB_MOBILE_SUBS:
+        mean: 2
+        std: 3
+        clip: 0
+      TV_CYCLING_L12M:
+        mean: 150
+        std: 20
+        clip: 0
+      CUST_AGE:
+        mean: 60
+        std: 15
+        clip: 18
+      TV_NB_DISINCT_SPORTS_VIEWED_L12M:
+        mean: 3
+        std: 4
+        clip: 1
+      TRAF_KIDS_L3M:
+        mean: 200
+        std: 200
+        clip: 0
+
+  sport:
+    # Young foot lovers
+    sport_1:
+      CUST_AGE:
+        mean: 22
+        std: 25
+        clip: 18
+      TRAF_SOCIAL_MEDIA_L3M:
+        mean: 300
+        std: 150
+        clip: 0
+      TRAF_TELCO_L3M:
+        mean: 30
+        std: 80
+        clip: 0
+      TRAF_PRICE_COMPARATOR_L3M:
+        mean: 5.0
+        std: 10.0
+        clip: 0
+      NB_DAYS_INTERNET_LINE:
+        mean: 300
+        std: 180
+        clip: 30
+      NB_COMPLAINTS_L3M:
+        mean: -1
+        std: 2
+        clip: 0
+      NB_TECHNICAL_ISSUES_L3M:
+        mean: -1
+        std: 2
+        clip: 0
+      NB_ADMINISTRATIVE_ISSUES_L3M:
+        mean: -1
+        std: 2
+        clip: 0
+      OUT_OF_BUNDLE_L3M:
+        mean: 0
+        std: 2
+        clip: 0
+      NB_MOBILE_SUBS:
+        mean: 1
+        std: 1
+        clip: 0
+      TV_USAGE_L1M:
+        mean: 500
+        std: 200
+        clip: 0
+      NB_DAYS_TV_LINE:
+        mean: 300
+        std: 250
+        clip: 30
+      TRAF_KIDS_L3M:
+        mean: 50
+        std: 40
+        clip: 0
+      TRAF_GAMING_L3M:
+        mean: 40
+        std: 40
+        clip: 0
+      TRAF_NETFLIX_L3M:
+        mean: 1000
+        std: 300
+        clip: 0
+      TRAF_DISNEY_L3M:
+        mean: 800
+        std: 300
+        clip: 0
+      TRAF_FOOTBALL_L12M:
+        mean: 1200
+        std: 500
+        clip: 0
+      TRAF_CYCLING_L12M:
+        mean: 100
+        std: 30
+        clip: 0
+      TV_FOOTBALL_L12M:
+        mean: 1000
+        std: 300
+        clip: 0
+      TV_CYCLING_L12M:
+        mean: 100
+        std: 50
+        clip: 0
+      TV_DOCUMENTARIES_L12M:
+        mean: 80
+        std: 50
+        clip: 0
+      TV_MOVIES_L12M:
+        mean: 700
+        std: 500
+        clip: 0
+      TV_CULTURE_L12M:
+        mean: 10
+        std: 50
+        clip: 0
+      TV_NB_DISINCT_SPORTS_VIEWED_L12M:
+        mean: 3
+        std: 2
+        clip: 1
+
+    # Young cyling lovers
+    sport_2:
+      CUST_AGE:
+        mean: 26
+        std: 15
+        clip: 18
+      TRAF_SOCIAL_MEDIA_L3M:
+        mean: 200
+        std: 150
+        clip: 0
+      TRAF_TELCO_L3M:
+        mean: 40
+        std: 90
+        clip: 0
+      TRAF_PRICE_COMPARATOR_L3M:
+        mean: 0.0
+        std: 20.0
+        clip: 0
+      NB_DAYS_INTERNET_LINE:
+        mean: 300
+        std: 250
+        clip: 30
+      NB_COMPLAINTS_L3M:
+        mean: -1
+        std: 2
+        clip: 0
+      NB_TECHNICAL_ISSUES_L3M:
+        mean: -1
+        std: 2
+        clip: 0
+      NB_ADMINISTRATIVE_ISSUES_L3M:
+        mean: -1
+        std: 2
+        clip: 0
+      OUT_OF_BUNDLE_L3M:
+        mean: 0
+        std: 2
+        clip: 0
+      NB_MOBILE_SUBS:
+        mean: 1
+        std: 1
+        clip: 0
+      TV_USAGE_L1M:
+        mean: 500
+        std: 150
+        clip: 0
+      NB_DAYS_TV_LINE:
+        mean: 300
+        std: 120
+        clip: 30
+      TRAF_KIDS_L3M:
+        mean: 50
+        std: 40
+        clip: 0
+      TRAF_GAMING_L3M:
+        mean: 40
+        std: 80
+        clip: 0
+      TRAF_NETFLIX_L3M:
+        mean: 800
+        std: 400
+        clip: 0
+      TRAF_DISNEY_L3M:
+        mean: 500
+        std: 300
+        clip: 0
+      TRAF_FOOTBALL_L12M:
+        mean: 100
+        std: 150
+        clip: 0
+      TRAF_CYCLING_L12M:
+        mean: 800
+        std: 300
+        clip: 0
+      TV_FOOTBALL_L12M:
+        mean: 100
+        std: 150
+        clip: 0
+      TV_CYCLING_L12M:
+        mean: 800
+        std: 250
+        clip: 0
+      TV_DOCUMENTARIES_L12M:
+        mean: 100
+        std: 50
+        clip: 0
+      TV_MOVIES_L12M:
+        mean: 300
+        std: 100
+        clip: 0
+      TV_CULTURE_L12M:
+        mean: 100
+        std: 80
+        clip: 0
+      TV_NB_DISINCT_SPORTS_VIEWED_L12M:
+        mean: 3
+        std: 2
+        clip: 1
+
+    # young customer with heavy online activity interested also in sport
+    sport_3:
+      CUST_AGE:
+        mean: 25
+        std: 15
+        clip: 18
+      TRAF_SOCIAL_MEDIA_L3M:
+        mean: 1000
+        std: 300
+        clip: 0
+      TRAF_TELCO_L3M:
+        mean: 80
+        std: 80
+        clip: 0
+      TRAF_PRICE_COMPARATOR_L3M:
+        mean: 20.0
+        std: 50.0
+        clip: 0
+      NB_DAYS_INTERNET_LINE:
+        mean: 250
+        std: 50
+        clip: 30
+      NB_COMPLAINTS_L3M:
+        mean: -3
+        std: 2
+        clip: 0
+      NB_TECHNICAL_ISSUES_L3M:
+        mean: -3
+        std: 2
+        clip: 0
+      NB_ADMINISTRATIVE_ISSUES_L3M:
+        mean: -3
+        std: 2
+        clip: 0
+      OUT_OF_BUNDLE_L3M:
+        mean: 10
+        std: 10
+        clip: 0
+      NB_MOBILE_SUBS:
+        mean: 1
+        std: 1
+        clip: 0
+      TV_USAGE_L1M:
+        mean: 1000
+        std: 250
+        clip: 0
+      NB_DAYS_TV_LINE:
+        mean: 200
+        std: 150
+        clip: 30
+      TRAF_KIDS_L3M:
+        mean: 90
+        std: 40
+        clip: 0
+      TRAF_GAMING_L3M:
+        mean: 500
+        std: 300
+        clip: 0
+      TRAF_NETFLIX_L3M:
+        mean: 1500
+        std: 500
+        clip: 0
+      TRAF_DISNEY_L3M:
+        mean: 1200
+        std: 300
+        clip: 0
+      TRAF_FOOTBALL_L12M:
+        mean: 450
+        std: 400
+        clip: 0
+      TRAF_CYCLING_L12M:
+        mean: 100
+        std: 100
+        clip: 0
+      TV_FOOTBALL_L12M:
+        mean: 300
+        std: 150
+        clip: 0
+      TV_CYCLING_L12M:
+        mean: 100
+        std: 70
+        clip: 0
+      TV_DOCUMENTARIES_L12M:
+        mean: 200
+        std: 50
+        clip: 0
+      TV_MOVIES_L12M:
+        mean: 500
+        std: 300
+        clip: 0
+      TV_CULTURE_L12M:
+        mean: 15
+        std: 20
+        clip: 0
+      TV_NB_DISINCT_SPORTS_VIEWED_L12M:
+        mean: 6
+        std: 2
+        clip: 1
+
+    # Family with interest in football
+    sport_4:
+      CUST_AGE:
+        mean: 45
+        std: 15
+        clip: 18
+      TRAF_SOCIAL_MEDIA_L3M:
+        mean: 800
+        std: 70
+        clip: 0
+      TRAF_TELCO_L3M:
+        mean: 60
+        std: 80
+        clip: 0
+      TRAF_PRICE_COMPARATOR_L3M:
+        mean: 40.0
+        std: 20.0
+        clip: 0
+      NB_DAYS_INTERNET_LINE:
+        mean: 650
+        std: 100
+        clip: 30
+      NB_COMPLAINTS_L3M:
+        mean: -2
+        std: 3
+        clip: 0
+      NB_TECHNICAL_ISSUES_L3M:
+        mean: -2
+        std: 3
+        clip: 0
+      NB_ADMINISTRATIVE_ISSUES_L3M:
+        mean: -2
+        std: 3
+        clip: 0
+      OUT_OF_BUNDLE_L3M:
+        mean: 0
+        std: 5
+        clip: 0
+      NB_MOBILE_SUBS:
+        mean: 3
+        std: 2
+        clip: 0
+      TV_USAGE_L1M:
+        mean: 1200
+        std: 80
+        clip: 0
+      NB_DAYS_TV_LINE:
+        mean: 400
+        std: 150
+        clip: 30
+      TRAF_KIDS_L3M:
+        mean: 350
+        std: 50
+        clip: 0
+      TRAF_GAMING_L3M:
+        mean: 200
+        std: 100
+        clip: 0
+      TRAF_NETFLIX_L3M:
+        mean: 1200
+        std: 100
+        clip: 0
+      TRAF_DISNEY_L3M:
+        mean: 800
+        std: 300
+        clip: 0
+      TRAF_FOOTBALL_L12M:
+        mean: 750
+        std: 200
+        clip: 0
+      TRAF_CYCLING_L12M:
+        mean: 80
+        std: 50
+        clip: 0
+      TV_FOOTBALL_L12M:
+        mean: 800
+        std: 150
+        clip: 0
+      TV_CYCLING_L12M:
+        mean: 100
+        std: 70
+        clip: 0
+      TV_DOCUMENTARIES_L12M:
+        mean: 100
+        std: 50
+        clip: 0
+      TV_MOVIES_L12M:
+        mean: 900
+        std: 50
+        clip: 0
+      TV_CULTURE_L12M:
+        mean: 100
+        std: 100
+        clip: 0
+      TV_NB_DISINCT_SPORTS_VIEWED_L12M:
+        mean: 3
+        std: 2
+        clip: 1
+
+    # Senior customers watching football
+    sport_5:
+      CUST_AGE:
+        mean: 65
+        std: 15
+        clip: 18
+      TRAF_SOCIAL_MEDIA_L3M:
+        mean: 100
+        std: 90
+        clip: 0
+      TRAF_TELCO_L3M:
+        mean: 70
+        std: 40
+        clip: 0
+      TRAF_PRICE_COMPARATOR_L3M:
+        mean: 30.0
+        std: 50.0
+        clip: 0
+      NB_DAYS_INTERNET_LINE:
+        mean: 1000
+        std: 200
+        clip: 30
+      NB_COMPLAINTS_L3M:
+        mean: 3
+        std: 3
+        clip: 0
+      NB_TECHNICAL_ISSUES_L3M:
+        mean: 3
+        std: 3
+        clip: 0
+      NB_ADMINISTRATIVE_ISSUES_L3M:
+        mean: 3
+        std: 3
+        clip: 0
+      OUT_OF_BUNDLE_L3M:
+        mean: -5
+        std: 5
+        clip: 0
+      NB_MOBILE_SUBS:
+        mean: 2
+        std: 1
+        clip: 0
+      TV_USAGE_L1M:
+        mean: 1500
+        std: 80
+        clip: 0
+      NB_DAYS_TV_LINE:
+        mean: 900
+        std: 250
+        clip: 30
+      TRAF_KIDS_L3M:
+        mean: 100
+        std: 40
+        clip: 0
+      TRAF_GAMING_L3M:
+        mean: 30
+        std: 80
+        clip: 0
+      TRAF_NETFLIX_L3M:
+        mean: 500
+        std: 150
+        clip: 0
+      TRAF_DISNEY_L3M:
+        mean: 500
+        std: 200
+        clip: 0
+      TRAF_FOOTBALL_L12M:
+        mean: 200
+        std: 80
+        clip: 0
+      TRAF_CYCLING_L12M:
+        mean: 200
+        std: 100
+        clip: 0
+      TV_FOOTBALL_L12M:
+        mean: 800
+        std: 200
+        clip: 0
+      TV_CYCLING_L12M:
+        mean: 800
+        std: 200
+        clip: 0
+      TV_DOCUMENTARIES_L12M:
+        mean: 100
+        std: 50
+        clip: 0
+      TV_MOVIES_L12M:
+        mean: 500
+        std: 100
+        clip: 0
+      TV_CULTURE_L12M:
+        mean: 45
+        std: 50
+        clip: 0
+      TV_NB_DISINCT_SPORTS_VIEWED_L12M:
+        mean: 6
+        std: 3
+        clip: 1
+
+  cinema:
+    # Young customers loving Netflix
+    cinema_1:
+      CUST_AGE:
+        mean: 28
+        std: 10
+        clip: 18
+      TRAF_SOCIAL_MEDIA_L3M:
+        mean: 700
+        std: 250
+        clip: 0
+      TRAF_TELCO_L3M:
+        mean: 50
+        std: 80
+        clip: 0
+      TRAF_PRICE_COMPARATOR_L3M:
+        mean: 15
+        std: 30.0
+        clip: 0
+      NB_DAYS_INTERNET_LINE:
+        mean: 300
+        std: 100
+        clip: 30
+      NB_COMPLAINTS_L3M:
+        mean: -1
+        std: 2
+        clip: 0
+      NB_TECHNICAL_ISSUES_L3M:
+        mean: -1
+        std: 2
+        clip: 0
+      NB_ADMINISTRATIVE_ISSUES_L3M:
+        mean: -1
+        std: 2
+        clip: 0
+      OUT_OF_BUNDLE_L3M:
+        mean: 5
+        std: 30
+        clip: 0
+      NB_MOBILE_SUBS:
+        mean: 1
+        std: 1
+        clip: 0
+      TV_USAGE_L1M:
+        mean: 800
+        std: 200
+        clip: 0
+      NB_DAYS_TV_LINE:
+        mean: 300
+        std: 200
+        clip: 30
+      TRAF_KIDS_L3M:
+        mean: 20
+        std: 100
+        clip: 0
+      TRAF_GAMING_L3M:
+        mean: 200
+        std: 100
+        clip: 0
+      TRAF_NETFLIX_L3M:
+        mean: 3000
+        std: 200
+        clip: 0
+      TRAF_DISNEY_L3M:
+        mean: 1000
+        std: 200
+        clip: 0
+      TRAF_FOOTBALL_L12M:
+        mean: 40
+        std: 20
+        clip: 0
+      TRAF_CYCLING_L12M:
+        mean: 10
+        std: 30
+        clip: 0
+      TV_FOOTBALL_L12M:
+        mean: 80
+        std: 100
+        clip: 0
+      TV_CYCLING_L12M:
+        mean: 30
+        std: 50
+        clip: 0
+      TV_DOCUMENTARIES_L12M:
+        mean: 150
+        std: 100
+        clip: 0
+      TV_MOVIES_L12M:
+        mean: 1000
+        std: 400
+        clip: 0
+      TV_CULTURE_L12M:
+        mean: 200
+        std: 200
+        clip: 0
+      TV_NB_DISINCT_SPORTS_VIEWED_L12M:
+        mean: 1
+        std: 2
+        clip: 1
+
+    # Young customers loving Disney+
+    cinema_2:
+      CUST_AGE:
+        mean: 28
+        std: 10
+        clip: 18
+      TRAF_SOCIAL_MEDIA_L3M:
+        mean: 700
+        std: 250
+        clip: 0
+      TRAF_TELCO_L3M:
+        mean: 50
+        std: 80
+        clip: 0
+      TRAF_PRICE_COMPARATOR_L3M:
+        mean: 15
+        std: 30.0
+        clip: 0
+      NB_DAYS_INTERNET_LINE:
+        mean: 300
+        std: 100
+        clip: 30
+      NB_COMPLAINTS_L3M:
+        mean: -1
+        std: 2
+        clip: 0
+      NB_TECHNICAL_ISSUES_L3M:
+        mean: -1
+        std: 2
+        clip: 0
+      NB_ADMINISTRATIVE_ISSUES_L3M:
+        mean: -1
+        std: 2
+        clip: 0
+      OUT_OF_BUNDLE_L3M:
+        mean: 5
+        std: 30
+        clip: 0
+      NB_MOBILE_SUBS:
+        mean: 1
+        std: 1
+        clip: 0
+      TV_USAGE_L1M:
+        mean: 600
+        std: 200
+        clip: 0
+      NB_DAYS_TV_LINE:
+        mean: 300
+        std: 200
+        clip: 30
+      TRAF_KIDS_L3M:
+        mean: 180
+        std: 100
+        clip: 0
+      TRAF_GAMING_L3M:
+        mean: 150
+        std: 200
+        clip: 0
+      TRAF_NETFLIX_L3M:
+        mean: 1000
+        std: 300
+        clip: 0
+      TRAF_DISNEY_L3M:
+        mean: 3000
+        std: 200
+        clip: 0
+      TRAF_FOOTBALL_L12M:
+        mean: 40
+        std: 20
+        clip: 0
+      TRAF_CYCLING_L12M:
+        mean: 10
+        std: 30
+        clip: 0
+      TV_FOOTBALL_L12M:
+        mean: 80
+        std: 50
+        clip: 0
+      TV_CYCLING_L12M:
+        mean: 30
+        std: 50
+        clip: 0
+      TV_DOCUMENTARIES_L12M:
+        mean: 150
+        std: 100
+        clip: 0
+      TV_MOVIES_L12M:
+        mean: 800
+        std: 200
+        clip: 0
+      TV_CULTURE_L12M:
+        mean: 150
+        std: 150
+        clip: 0
+      TV_NB_DISINCT_SPORTS_VIEWED_L12M:
+        mean: 1
+        std: 2
+        clip: 1
+
+    # Medior cinema and culture lover
+    cinema_3:
+      CUST_AGE:
+        mean: 35
+        std: 15
+        clip: 18
+      TRAF_SOCIAL_MEDIA_L3M:
+        mean: 200
+        std: 150
+        clip: 0
+      TRAF_TELCO_L3M:
+        mean: 35
+        std: 80
+        clip: 0
+      TRAF_PRICE_COMPARATOR_L3M:
+        mean: 35
+        std: 20.0
+        clip: 0
+      NB_DAYS_INTERNET_LINE:
+        mean: 400
+        std: 180
+        clip: 30
+      NB_COMPLAINTS_L3M:
+        mean: -1
+        std: 2
+        clip: 0
+      NB_TECHNICAL_ISSUES_L3M:
+        mean: -1
+        std: 2
+        clip: 0
+      NB_ADMINISTRATIVE_ISSUES_L3M:
+        mean: -1
+        std: 2
+        clip: 0
+      OUT_OF_BUNDLE_L3M:
+        mean: 0
+        std: 15
+        clip: 0
+      NB_MOBILE_SUBS:
+        mean: 1
+        std: 2
+        clip: 0
+      TV_USAGE_L1M:
+        mean: 800
+        std: 200
+        clip: 0
+      NB_DAYS_TV_LINE:
+        mean: 400
+        std: 250
+        clip: 30
+      TRAF_KIDS_L3M:
+        mean: 50
+        std: 40
+        clip: 0
+      TRAF_GAMING_L3M:
+        mean: 200
+        std: 40
+        clip: 0
+      TRAF_NETFLIX_L3M:
+        mean: 1200
+        std: 300
+        clip: 0
+      TRAF_DISNEY_L3M:
+        mean: 800
+        std: 400
+        clip: 0
+      TRAF_FOOTBALL_L12M:
+        mean: 20
+        std: 20
+        clip: 0
+      TRAF_CYCLING_L12M:
+        mean: 50
+        std: 30
+        clip: 0
+      TV_FOOTBALL_L12M:
+        mean: 200
+        std: 100
+        clip: 0
+      TV_CYCLING_L12M:
+        mean: 100
+        std: 50
+        clip: 0
+      TV_DOCUMENTARIES_L12M:
+        mean: 400
+        std: 50
+        clip: 0
+      TV_MOVIES_L12M:
+        mean: 1500
+        std: 500
+        clip: 0
+      TV_CULTURE_L12M:
+        mean: 800
+        std: 100
+        clip: 0
+      TV_NB_DISINCT_SPORTS_VIEWED_L12M:
+        mean: 1
+        std: 2
+        clip: 1
+
+    # Family with kids watching TV together
+    cinema_4:
+      CUST_AGE:
+        mean: 40
+        std: 20
+        clip: 18
+      TRAF_SOCIAL_MEDIA_L3M:
+        mean: 800
+        std: 300
+        clip: 0
+      TRAF_TELCO_L3M:
+        mean: 25
+        std: 80
+        clip: 0
+      TRAF_PRICE_COMPARATOR_L3M:
+        mean: 15
+        std: 25.0
+        clip: 0
+      NB_DAYS_INTERNET_LINE:
+        mean: 500
+        std: 180
+        clip: 30
+      NB_COMPLAINTS_L3M:
+        mean: -1
+        std: 2
+        clip: 0
+      NB_TECHNICAL_ISSUES_L3M:
+        mean: -2
+        std: 2
+        clip: 0
+      NB_ADMINISTRATIVE_ISSUES_L3M:
+        mean: -1
+        std: 2
+        clip: 0
+      OUT_OF_BUNDLE_L3M:
+        mean: 0
+        std: 25
+        clip: 0
+      NB_MOBILE_SUBS:
+        mean: 2
+        std: 3
+        clip: 0
+      TV_USAGE_L1M:
+        mean: 1200
+        std: 500
+        clip: 0
+      NB_DAYS_TV_LINE:
+        mean: 500
+        std: 150
+        clip: 30
+      TRAF_KIDS_L3M:
+        mean: 450
+        std: 100
+        clip: 0
+      TRAF_GAMING_L3M:
+        mean: 100
+        std: 80
+        clip: 0
+      TRAF_NETFLIX_L3M:
+        mean: 900
+        std: 300
+        clip: 0
+      TRAF_DISNEY_L3M:
+        mean: 1200
+        std: 400
+        clip: 0
+      TRAF_FOOTBALL_L12M:
+        mean: 80
+        std: 50
+        clip: 0
+      TRAF_CYCLING_L12M:
+        mean: 10
+        std: 30
+        clip: 0
+      TV_FOOTBALL_L12M:
+        mean: 100
+        std: 30
+        clip: 0
+      TV_CYCLING_L12M:
+        mean: 20
+        std: 50
+        clip: 0
+      TV_DOCUMENTARIES_L12M:
+        mean: 100
+        std: 50
+        clip: 0
+      TV_MOVIES_L12M:
+        mean: 500
+        std: 150
+        clip: 0
+      TV_CULTURE_L12M:
+        mean: 200
+        std: 150
+        clip: 0
+      TV_NB_DISINCT_SPORTS_VIEWED_L12M:
+        mean: 3
+        std: 2
+        clip: 1
+
+    # Senior customers loving series
+    cinema_5:
+      CUST_AGE:
+        mean: 60
+        std: 15
+        clip: 18
+      TRAF_SOCIAL_MEDIA_L3M:
+        mean: 50
+        std: 100
+        clip: 0
+      TRAF_TELCO_L3M:
+        mean: 45
+        std: 40
+        clip: 0
+      TRAF_PRICE_COMPARATOR_L3M:
+        mean: 25
+        std: 20.0
+        clip: 0
+      NB_DAYS_INTERNET_LINE:
+        mean: 900
+        std: 300
+        clip: 30
+      NB_COMPLAINTS_L3M:
+        mean: 0
+        std: 2
+        clip: 0
+      NB_TECHNICAL_ISSUES_L3M:
+        mean: 0
+        std: 2
+        clip: 0
+      NB_ADMINISTRATIVE_ISSUES_L3M:
+        mean: 0
+        std: 2
+        clip: 0
+      OUT_OF_BUNDLE_L3M:
+        mean: -10
+        std: 2
+        clip: 0
+      NB_MOBILE_SUBS:
+        mean: 2
+        std: 2
+        clip: 0
+      TV_USAGE_L1M:
+        mean: 1200
+        std: 500
+        clip: 0
+      NB_DAYS_TV_LINE:
+        mean: 800
+        std: 450
+        clip: 30
+      TRAF_KIDS_L3M:
+        mean: 100
+        std: 40
+        clip: 0
+      TRAF_GAMING_L3M:
+        mean: 20
+        std: 40
+        clip: 0
+      TRAF_NETFLIX_L3M:
+        mean: 500
+        std: 100
+        clip: 0
+      TRAF_DISNEY_L3M:
+        mean: 200
+        std: 100
+        clip: 0
+      TRAF_FOOTBALL_L12M:
+        mean: 80
+        std: 40
+        clip: 0
+      TRAF_CYCLING_L12M:
+        mean: 150
+        std: 50
+        clip: 0
+      TV_FOOTBALL_L12M:
+        mean: 100
+        std: 20
+        clip: 0
+      TV_CYCLING_L12M:
+        mean: 300
+        std: 50
+        clip: 0
+      TV_DOCUMENTARIES_L12M:
+        mean: 1500
+        std: 400
+        clip: 0
+      TV_MOVIES_L12M:
+        mean: 800
+        std: 300
+        clip: 0
+      TV_CULTURE_L12M:
+        mean: 800
+        std: 200
+        clip: 0
+      TV_NB_DISINCT_SPORTS_VIEWED_L12M:
+        mean: 2
+        std: 2
+        clip: 1
