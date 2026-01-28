@@ -1,0 +1,16 @@
+storage:
+  storage_account_name: "blobstoragehandson"
+  container_name: "next-best-offer"
+  storage_account_key: "x"
+
+nbo_offers: ['sport', 'cinema', 'churn']
+
+LLM:
+  chatGPT: {key_name: "NBO_key",
+            key_value: "x"}
+
+linked_service:
+  databricks: "x"
+
+hosts:
+  databricks: "x"
