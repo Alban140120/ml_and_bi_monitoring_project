@@ -1,0 +1,19 @@
+table Mesures
+	lineageTag: 33a7f01b-e2d7-4088-ae32-bb1fa758ab06
+
+	measure sum_predic_churn = SUM(fact_nbochurnscoringpred[PREDICTION_CHURN])
+		formatString: 0
+		lineageTag: 59a7a54d-736b-4b07-b0fb-2d4bac940734
+
+	partition Mesures = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Colonne 1" = _t]),
+				    #"Type modifié" = Table.TransformColumnTypes(Source,{{"Colonne 1", type text}}),
+				    #"Colonnes supprimées" = Table.RemoveColumns(#"Type modifié",{"Colonne 1"})
+				in
+				    #"Colonnes supprimées"
+
+	annotation PBI_ResultType = Table
+
