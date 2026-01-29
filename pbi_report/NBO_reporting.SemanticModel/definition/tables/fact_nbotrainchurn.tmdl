@@ -1,0 +1,584 @@
+table fact_nbotrainchurn
+	lineageTag: a2f78f1e-43a7-4223-86a9-22475f8c1d26
+
+	column CUST_NUM
+		dataType: int64
+		formatString: 0
+		lineageTag: a870603d-2bb1-4911-a7a8-ecf0d5df0456
+		summarizeBy: none
+		sourceColumn: CUST_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column YEAR
+		dataType: int64
+		formatString: 0
+		lineageTag: 33bd2704-158c-4f43-9b05-5880ce25cb82
+		summarizeBy: sum
+		sourceColumn: YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column MONTH
+		dataType: int64
+		formatString: 0
+		lineageTag: 4cd6e773-e32a-4498-b357-fa049b104633
+		summarizeBy: sum
+		sourceColumn: MONTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column TARGET_CHURN
+		dataType: int64
+		formatString: 0
+		lineageTag: 85c2edd4-0158-4c08-a452-ba60905609ae
+		summarizeBy: sum
+		sourceColumn: TARGET_CHURN
+
+		annotation SummarizationSetBy = Automatic
+
+	column PREDICTION_CHURN
+		dataType: int64
+		formatString: 0
+		lineageTag: a5e29daf-87df-4c5e-a750-11c5361d1264
+		summarizeBy: sum
+		sourceColumn: PREDICTION_CHURN
+
+		annotation SummarizationSetBy = Automatic
+
+	column y_proba
+		dataType: double
+		lineageTag: b4b962b8-36eb-4743-a7e2-604a20ce217b
+		summarizeBy: sum
+		sourceColumn: y_proba
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column THRESHOLD_USED
+		dataType: double
+		lineageTag: 48b73759-0071-494f-bf2f-f82ede338db2
+		summarizeBy: sum
+		sourceColumn: THRESHOLD_USED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column INTERNET_DURATION_CYCLING_L3M_SECONDES
+		dataType: int64
+		formatString: 0
+		lineageTag: 3b4f92f8-bead-4106-a51c-3374bb962d80
+		summarizeBy: sum
+		sourceColumn: INTERNET_DURATION_CYCLING_L3M_SECONDES
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_DURATION_CYCLING_L3M_DAYS
+		dataType: int64
+		formatString: 0
+		lineageTag: b1c6f39f-71ff-44ca-b3fe-d3d2ff73c2a8
+		summarizeBy: sum
+		sourceColumn: INTERNET_DURATION_CYCLING_L3M_DAYS
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_RANK_CYCLING_L3M
+		dataType: int64
+		formatString: 0
+		lineageTag: 2390e91f-7ca4-4ee2-a481-ad1f19909245
+		summarizeBy: sum
+		sourceColumn: INTERNET_RANK_CYCLING_L3M
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_DURATION_DISNEY_L3M_SECONDES
+		dataType: int64
+		formatString: 0
+		lineageTag: 96bee340-cd78-4045-9b0b-2a7a3b34e06b
+		summarizeBy: sum
+		sourceColumn: INTERNET_DURATION_DISNEY_L3M_SECONDES
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_DURATION_DISNEY_L3M_DAYS
+		dataType: int64
+		formatString: 0
+		lineageTag: a3f32dae-33b5-4d39-9ffb-d8127b3d294c
+		summarizeBy: sum
+		sourceColumn: INTERNET_DURATION_DISNEY_L3M_DAYS
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_RANK_DISNEY_L3M
+		dataType: int64
+		formatString: 0
+		lineageTag: 923a8a2e-c232-4245-9431-c2154319d82e
+		summarizeBy: sum
+		sourceColumn: INTERNET_RANK_DISNEY_L3M
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_DURATION_FOOTBALL_L3M_SECONDES
+		dataType: int64
+		formatString: 0
+		lineageTag: 44168405-a3c4-40d0-a748-b3ce84216fe8
+		summarizeBy: sum
+		sourceColumn: INTERNET_DURATION_FOOTBALL_L3M_SECONDES
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_DURATION_FOOTBALL_L3M_DAYS
+		dataType: int64
+		formatString: 0
+		lineageTag: 7f5c7949-14a0-437c-80bd-2ab3c83b4408
+		summarizeBy: sum
+		sourceColumn: INTERNET_DURATION_FOOTBALL_L3M_DAYS
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_RANK_FOOTBALL_L3M
+		dataType: int64
+		formatString: 0
+		lineageTag: 50beec2c-1b83-4955-b7b0-24620da30629
+		summarizeBy: sum
+		sourceColumn: INTERNET_RANK_FOOTBALL_L3M
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_DURATION_GAMING_L3M_SECONDES
+		dataType: int64
+		formatString: 0
+		lineageTag: b70de857-07a1-4568-aede-ace9c64ce3b8
+		summarizeBy: sum
+		sourceColumn: INTERNET_DURATION_GAMING_L3M_SECONDES
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_DURATION_GAMING_L3M_DAYS
+		dataType: int64
+		formatString: 0
+		lineageTag: fd762c52-7023-4c6a-8f37-515044e05584
+		summarizeBy: sum
+		sourceColumn: INTERNET_DURATION_GAMING_L3M_DAYS
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_RANK_GAMING_L3M
+		dataType: int64
+		formatString: 0
+		lineageTag: 37accfd6-c700-41cf-ba37-35296b825a15
+		summarizeBy: sum
+		sourceColumn: INTERNET_RANK_GAMING_L3M
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_DURATION_KIDS_L3M_SECONDES
+		dataType: int64
+		formatString: 0
+		lineageTag: 80e9eab2-4129-4076-8dfa-9d80ad6dc78e
+		summarizeBy: sum
+		sourceColumn: INTERNET_DURATION_KIDS_L3M_SECONDES
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_DURATION_KIDS_L3M_DAYS
+		dataType: int64
+		formatString: 0
+		lineageTag: 219aecef-5393-4cec-b3ba-91aeaf04e589
+		summarizeBy: sum
+		sourceColumn: INTERNET_DURATION_KIDS_L3M_DAYS
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_RANK_KIDS_L3M
+		dataType: int64
+		formatString: 0
+		lineageTag: f25d2fc2-17a9-471c-ad37-3de8fe5c81c0
+		summarizeBy: sum
+		sourceColumn: INTERNET_RANK_KIDS_L3M
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_DURATION_NETFLIX_L3M_SECONDES
+		dataType: int64
+		formatString: 0
+		lineageTag: ef92aabd-a0dd-48c8-b470-3cf765fb8e24
+		summarizeBy: sum
+		sourceColumn: INTERNET_DURATION_NETFLIX_L3M_SECONDES
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_DURATION_NETFLIX_L3M_DAYS
+		dataType: int64
+		formatString: 0
+		lineageTag: 78a27a58-e4f7-4589-9c4a-e733ac80e1bf
+		summarizeBy: sum
+		sourceColumn: INTERNET_DURATION_NETFLIX_L3M_DAYS
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_RANK_NETFLIX_L3M
+		dataType: int64
+		formatString: 0
+		lineageTag: db236946-a843-4738-84de-f10f3810a2ee
+		summarizeBy: sum
+		sourceColumn: INTERNET_RANK_NETFLIX_L3M
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_DURATION_PRICE_COMPARATOR_L3M_SECONDES
+		dataType: int64
+		formatString: 0
+		lineageTag: 23d6448a-178d-42a8-8fb0-6a00606b265f
+		summarizeBy: sum
+		sourceColumn: INTERNET_DURATION_PRICE_COMPARATOR_L3M_SECONDES
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_DURATION_PRICE_COMPARATOR_L3M_DAYS
+		dataType: int64
+		formatString: 0
+		lineageTag: c9ad8860-9574-43d6-96dc-410fb0633a52
+		summarizeBy: sum
+		sourceColumn: INTERNET_DURATION_PRICE_COMPARATOR_L3M_DAYS
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_RANK_PRICE_COMPARATOR_L3M
+		dataType: int64
+		formatString: 0
+		lineageTag: cd585a1e-b307-4b77-8670-9b40e0a7063a
+		summarizeBy: sum
+		sourceColumn: INTERNET_RANK_PRICE_COMPARATOR_L3M
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_DURATION_SOCIAL_MEDIA_L3M_SECONDES
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c36e590-ceab-4de0-8c00-72f5da5c84dc
+		summarizeBy: sum
+		sourceColumn: INTERNET_DURATION_SOCIAL_MEDIA_L3M_SECONDES
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_DURATION_SOCIAL_MEDIA_L3M_DAYS
+		dataType: int64
+		formatString: 0
+		lineageTag: 80e3b9e6-5aa5-4203-a06d-51d580abef57
+		summarizeBy: sum
+		sourceColumn: INTERNET_DURATION_SOCIAL_MEDIA_L3M_DAYS
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_RANK_SOCIAL_MEDIA_L3M
+		dataType: int64
+		formatString: 0
+		lineageTag: 792279f1-871d-4a61-92fe-ce2b54cd7355
+		summarizeBy: sum
+		sourceColumn: INTERNET_RANK_SOCIAL_MEDIA_L3M
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_DURATION_TELCO_L3M_SECONDES
+		dataType: int64
+		formatString: 0
+		lineageTag: 29e8ebbb-0a70-4a17-b921-17a7475bf8f5
+		summarizeBy: sum
+		sourceColumn: INTERNET_DURATION_TELCO_L3M_SECONDES
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_DURATION_TELCO_L3M_DAYS
+		dataType: int64
+		formatString: 0
+		lineageTag: 0bdf5e6f-cdb1-4a37-b471-f089f3a1c616
+		summarizeBy: sum
+		sourceColumn: INTERNET_DURATION_TELCO_L3M_DAYS
+
+		annotation SummarizationSetBy = Automatic
+
+	column INTERNET_RANK_TELCO_L3M
+		dataType: int64
+		formatString: 0
+		lineageTag: ca2a66f0-7378-4c43-9069-290c5d86efa3
+		summarizeBy: sum
+		sourceColumn: INTERNET_RANK_TELCO_L3M
+
+		annotation SummarizationSetBy = Automatic
+
+	column TV_DURATION_CULTURE_L3M_SECONDES
+		dataType: int64
+		formatString: 0
+		lineageTag: 8c4a996f-dd0d-4e97-a4c4-7fd9799d0f77
+		summarizeBy: sum
+		sourceColumn: TV_DURATION_CULTURE_L3M_SECONDES
+
+		annotation SummarizationSetBy = Automatic
+
+	column TV_DURATION_CULTURE_L3M_DAYS
+		dataType: int64
+		formatString: 0
+		lineageTag: de6fbbbf-3d3f-40c2-8f6f-bc7f82acee47
+		summarizeBy: sum
+		sourceColumn: TV_DURATION_CULTURE_L3M_DAYS
+
+		annotation SummarizationSetBy = Automatic
+
+	column TV_RANK_CULTURE_L3M
+		dataType: int64
+		formatString: 0
+		lineageTag: 7721beb9-733c-456f-a84d-1dc9e1a4ce9c
+		summarizeBy: sum
+		sourceColumn: TV_RANK_CULTURE_L3M
+
+		annotation SummarizationSetBy = Automatic
+
+	column TV_DURATION_CYCLING_L3M_SECONDES
+		dataType: int64
+		formatString: 0
+		lineageTag: 62156ddc-acbd-4721-9223-dc2bc6aa12fd
+		summarizeBy: sum
+		sourceColumn: TV_DURATION_CYCLING_L3M_SECONDES
+
+		annotation SummarizationSetBy = Automatic
+
+	column TV_DURATION_CYCLING_L3M_DAYS
+		dataType: int64
+		formatString: 0
+		lineageTag: 02dfd2a0-6712-4f51-9e4b-95899ce1dd62
+		summarizeBy: sum
+		sourceColumn: TV_DURATION_CYCLING_L3M_DAYS
+
+		annotation SummarizationSetBy = Automatic
+
+	column TV_RANK_CYCLING_L3M
+		dataType: int64
+		formatString: 0
+		lineageTag: ad9c19f9-faf5-4a13-9787-daae2ea6dfba
+		summarizeBy: sum
+		sourceColumn: TV_RANK_CYCLING_L3M
+
+		annotation SummarizationSetBy = Automatic
+
+	column TV_DURATION_DOCUMENTARIES_L3M_SECONDES
+		dataType: int64
+		formatString: 0
+		lineageTag: 26f6103c-a492-4c43-9bcc-5dc00cb8b663
+		summarizeBy: sum
+		sourceColumn: TV_DURATION_DOCUMENTARIES_L3M_SECONDES
+
+		annotation SummarizationSetBy = Automatic
+
+	column TV_DURATION_DOCUMENTARIES_L3M_DAYS
+		dataType: int64
+		formatString: 0
+		lineageTag: 863c7c63-ec42-4b64-bbf6-95995e669e93
+		summarizeBy: sum
+		sourceColumn: TV_DURATION_DOCUMENTARIES_L3M_DAYS
+
+		annotation SummarizationSetBy = Automatic
+
+	column TV_RANK_DOCUMENTARIES_L3M
+		dataType: int64
+		formatString: 0
+		lineageTag: a8edd96a-b374-4455-ad33-953a2087d37a
+		summarizeBy: sum
+		sourceColumn: TV_RANK_DOCUMENTARIES_L3M
+
+		annotation SummarizationSetBy = Automatic
+
+	column TV_DURATION_FOOTBALL_L3M_SECONDES
+		dataType: int64
+		formatString: 0
+		lineageTag: 5712934e-a390-4e1b-bb97-3adee0c043c2
+		summarizeBy: sum
+		sourceColumn: TV_DURATION_FOOTBALL_L3M_SECONDES
+
+		annotation SummarizationSetBy = Automatic
+
+	column TV_DURATION_FOOTBALL_L3M_DAYS
+		dataType: int64
+		formatString: 0
+		lineageTag: c9289849-7d41-452b-bb8f-299f712fbcbb
+		summarizeBy: sum
+		sourceColumn: TV_DURATION_FOOTBALL_L3M_DAYS
+
+		annotation SummarizationSetBy = Automatic
+
+	column TV_RANK_FOOTBALL_L3M
+		dataType: int64
+		formatString: 0
+		lineageTag: 80e93d3c-4013-4a5a-bc17-6740fd18a19e
+		summarizeBy: sum
+		sourceColumn: TV_RANK_FOOTBALL_L3M
+
+		annotation SummarizationSetBy = Automatic
+
+	column TV_DURATION_MOVIES_L3M_SECONDES
+		dataType: int64
+		formatString: 0
+		lineageTag: 8343ff27-93f0-413d-87ea-701f213c945d
+		summarizeBy: sum
+		sourceColumn: TV_DURATION_MOVIES_L3M_SECONDES
+
+		annotation SummarizationSetBy = Automatic
+
+	column TV_DURATION_MOVIES_L3M_DAYS
+		dataType: int64
+		formatString: 0
+		lineageTag: 2a8b1a43-77d3-4ba4-8868-3c52c8bd727b
+		summarizeBy: sum
+		sourceColumn: TV_DURATION_MOVIES_L3M_DAYS
+
+		annotation SummarizationSetBy = Automatic
+
+	column TV_RANK_MOVIES_L3M
+		dataType: int64
+		formatString: 0
+		lineageTag: 73940030-b942-488e-a00c-ab06657e0417
+		summarizeBy: sum
+		sourceColumn: TV_RANK_MOVIES_L3M
+
+		annotation SummarizationSetBy = Automatic
+
+	column AMOUNT_OUT_OF_BUNDLE_L3M
+		dataType: int64
+		formatString: 0
+		lineageTag: 6fc75f2e-c44b-4ff7-8fef-637088b6dfb3
+		summarizeBy: sum
+		sourceColumn: AMOUNT_OUT_OF_BUNDLE_L3M
+
+		annotation SummarizationSetBy = Automatic
+
+	column NB_DAYS_OUT_OF_BUNDLE_L3M
+		dataType: int64
+		formatString: 0
+		lineageTag: 837129eb-a743-4687-a744-0de9924fd107
+		summarizeBy: sum
+		sourceColumn: NB_DAYS_OUT_OF_BUNDLE_L3M
+
+		annotation SummarizationSetBy = Automatic
+
+	column AVG_CUST_AGE
+		dataType: double
+		lineageTag: d43c3624-d303-403a-834e-62b7da7542c0
+		summarizeBy: sum
+		sourceColumn: AVG_CUST_AGE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AVG_NB_DAYS_INTERNET_LINE
+		dataType: double
+		lineageTag: 9094d708-5487-4c4d-b69e-9ac0c6bb5a80
+		summarizeBy: sum
+		sourceColumn: AVG_NB_DAYS_INTERNET_LINE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AVG_NB_DAYS_TV_LINE
+		dataType: double
+		lineageTag: 272c6366-e71b-4c8f-b50c-4aae246185cd
+		summarizeBy: sum
+		sourceColumn: AVG_NB_DAYS_TV_LINE
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AVG_NB_MOBILE_SUBS
+		dataType: double
+		lineageTag: 62ae6c12-0785-4f2b-9ac8-8c344f2fff80
+		summarizeBy: sum
+		sourceColumn: AVG_NB_MOBILE_SUBS
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AMOUNT_OF_CONTACT_ADMINISTRATIVE_ISSUES_L3M
+		dataType: int64
+		formatString: 0
+		lineageTag: 853aa4be-2cdf-486e-ab85-d8d44fb8095e
+		summarizeBy: sum
+		sourceColumn: AMOUNT_OF_CONTACT_ADMINISTRATIVE_ISSUES_L3M
+
+		annotation SummarizationSetBy = Automatic
+
+	column AMOUNT_OF_CONTACT_COMPLAINTS_L3M
+		dataType: int64
+		formatString: 0
+		lineageTag: f8c9416f-4372-47a0-a97d-cebce2baef14
+		summarizeBy: sum
+		sourceColumn: AMOUNT_OF_CONTACT_COMPLAINTS_L3M
+
+		annotation SummarizationSetBy = Automatic
+
+	column JOURNEY_DURATION_ADMINISTRATIVE_ISSUES_L3M_DAYS
+		dataType: int64
+		formatString: 0
+		lineageTag: 9de5eec0-836d-4f5d-aa32-a07bf1943c22
+		summarizeBy: sum
+		sourceColumn: JOURNEY_DURATION_ADMINISTRATIVE_ISSUES_L3M_DAYS
+
+		annotation SummarizationSetBy = Automatic
+
+	column JOURNEY_DURATION_COMPLAINTS_L3M_DAYS
+		dataType: int64
+		formatString: 0
+		lineageTag: 94ed1274-aea6-44b4-bcc9-206447f8c066
+		summarizeBy: sum
+		sourceColumn: JOURNEY_DURATION_COMPLAINTS_L3M_DAYS
+
+		annotation SummarizationSetBy = Automatic
+
+	column JOURNEY_DURATION_TECHNICAL_ISSUES_L3M_DAYS
+		dataType: int64
+		formatString: 0
+		lineageTag: 7854c67e-b035-4d43-927f-d09253a8d3bb
+		summarizeBy: sum
+		sourceColumn: JOURNEY_DURATION_TECHNICAL_ISSUES_L3M_DAYS
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_NUMBER_OF_CONTACTS_L3M
+		dataType: int64
+		formatString: 0
+		lineageTag: 0732a390-284d-4c03-bfe4-aff65479b9bf
+		summarizeBy: sum
+		sourceColumn: TOTAL_NUMBER_OF_CONTACTS_L3M
+
+		annotation SummarizationSetBy = Automatic
+
+	column TOTAL_NUMBER_OF_JOURNEYS_L3M
+		dataType: int64
+		formatString: 0
+		lineageTag: ab59ae09-9391-4fa9-b79a-bb600940e06c
+		summarizeBy: sum
+		sourceColumn: TOTAL_NUMBER_OF_JOURNEYS_L3M
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_nbotrainchurn = m
+		mode: import
+		source =
+				let
+				    Source = Databricks.Catalogs("adb-1819084380490284.4.azuredatabricks.net", "/sql/1.0/warehouses/fe882e31ed39de5c", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation=null]),
+				    amavla_dev_central_adbw_Database = Source{[Name="amavla_dev_central_adbw",Kind="Database"]}[Data],
+				    default_Schema = amavla_dev_central_adbw_Database{[Name="default",Kind="Schema"]}[Data],
+				    nbotrainchurn_Table = default_Schema{[Name="nbotrainchurn",Kind="Table"]}[Data]
+				in
+				    nbotrainchurn_Table
+
+	changedProperty = Name
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

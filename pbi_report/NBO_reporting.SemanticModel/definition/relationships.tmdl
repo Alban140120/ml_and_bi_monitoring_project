@@ -1,0 +1,35 @@
+relationship AutoDetected_b00e5d90-efcb-4038-812b-e5d4d1da87d0
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: fact_nbochurnscoringpred.CUST_NUM
+	toColumn: dim_nbo_customers.cust_num
+
+relationship AutoDetected_ddeef4b0-7923-4061-b766-f96f12802412
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: fact_nbocinemascoringpred.CUST_NUM
+	toColumn: dim_nbo_customers.cust_num
+
+relationship AutoDetected_437ed989-d5a7-41d0-8b51-f33e36a81f20
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: fact_nbosportscoringpred.CUST_NUM
+	toColumn: dim_nbo_customers.cust_num
+
+relationship AutoDetected_03caf2da-7088-46be-8e3d-0dab450d1c2a
+	fromColumn: fact_nbotrainchurn.CUST_NUM
+	toColumn: dim_nbo_customers.cust_num
+
+relationship AutoDetected_bf6fc6af-af22-47d8-a270-9f751a425c49
+	fromColumn: fact_nbotraincinema.CUST_NUM
+	toColumn: dim_nbo_customers.cust_num
+
+relationship AutoDetected_c91eba8d-ae11-4d3e-8a2d-f182beb77cdf
+	fromColumn: fact_nbotrainsport.CUST_NUM
+	toColumn: dim_nbo_customers.cust_num
+
+relationship 09c3e5b6-c37d-4444-be9d-6a704d241536
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_nbo_customers.birth_date
+	toColumn: LocalDateTable_0ec01725-8c62-4ede-a861-4ae49143e67d.Date
+

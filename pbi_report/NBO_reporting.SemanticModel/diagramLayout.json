@@ -1,0 +1,119 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 1211.529064283563,
+            "y": 264.387664685789
+          },
+          "nodeIndex": "Mesures",
+          "nodeLineageTag": "33a7f01b-e2d7-4088-ae32-bb1fa758ab06",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 459.39906625524554,
+            "y": 362.04335444341245
+          },
+          "nodeIndex": "dim_nbo_customers",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 933.812354292645,
+            "y": 567.03044537934352
+          },
+          "nodeIndex": "fact_nbochurnscoringpred",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 798.48972054227124,
+            "y": 69.631601057266764
+          },
+          "nodeIndex": "fact_nbocinemascoringpred",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 526.72278494225782,
+            "y": 705.37019261711851
+          },
+          "nodeIndex": "fact_nbosportscoringpred",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 8.0988851072629586,
+            "y": 136.21654688033829
+          },
+          "nodeIndex": "fact_nbotrainchurn",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 371.86166289326792,
+            "y": 0
+          },
+          "nodeIndex": "fact_nbotraincinema",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 4.20154191427639,
+            "y": 531.6151941464725
+          },
+          "nodeIndex": "fact_nbotrainsport",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Toutes les tables",
+      "zoomValue": 48.036551708403216,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Toutes les tables",
+  "defaultDiagram": "Toutes les tables"
+}

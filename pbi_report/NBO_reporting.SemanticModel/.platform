@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "NBO_reporting"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "ef04ead6-cc5a-4905-b8db-1393fb2aa7c3"
+  }
+}
