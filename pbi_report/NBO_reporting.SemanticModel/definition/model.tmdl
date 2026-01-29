@@ -1,0 +1,27 @@
+model Model
+	culture: fr-BE
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fr-BE
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["fact_nbochurnscoringpred","fact_nbocinemascoringpred","fact_nbosportscoringpred","fact_nbotrainchurn","fact_nbotraincinema","fact_nbotrainsport","Mesures","dim_nbo_customers"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table fact_nbochurnscoringpred
+ref table fact_nbocinemascoringpred
+ref table fact_nbosportscoringpred
+ref table fact_nbotrainchurn
+ref table fact_nbotraincinema
+ref table fact_nbotrainsport
+ref table Mesures
+ref table dim_nbo_customers
+ref table DateTableTemplate_2fb84854-2449-41ef-9fbe-4d56878d251e
+ref table LocalDateTable_0ec01725-8c62-4ede-a861-4ae49143e67d
+
+ref cultureInfo fr-BE
+

@@ -1,0 +1,132 @@
+table dim_nbo_customers
+	lineageTag: c7be3043-35a2-4fd4-86f5-76541d31a8b2
+
+	column cust_num
+		dataType: int64
+		formatString: 0
+		lineageTag: f343cf83-1f8e-4bc9-9308-347e40acc4ec
+		summarizeBy: none
+		sourceColumn: cust_num
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		lineageTag: 55b84888-e51e-4cd7-858e-f92c3f7bca55
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column nationality
+		dataType: string
+		lineageTag: 5db1e742-f756-4a98-8063-a27e74b51a5c
+		summarizeBy: none
+		sourceColumn: nationality
+
+		annotation SummarizationSetBy = Automatic
+
+	column birth_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 40de1e57-48b4-40e0-91c0-ce25177c6f99
+		summarizeBy: none
+		sourceColumn: birth_date
+
+		variation Variation
+			isDefault
+			relationship: 09c3e5b6-c37d-4444-be9d-6a704d241536
+			defaultHierarchy: LocalDateTable_0ec01725-8c62-4ede-a861-4ae49143e67d.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column street_address
+		dataType: string
+		lineageTag: 2c4ce646-6614-435f-b811-fef2a98517cc
+		summarizeBy: none
+		sourceColumn: street_address
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: b4e3a3d8-da60-4af1-9dec-a37c625d99a7
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column postal_code
+		dataType: string
+		lineageTag: 9dcb4784-a5d1-493f-a19d-47e3a4bf12ae
+		summarizeBy: none
+		sourceColumn: postal_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		lineageTag: 692c4de3-4fc1-4544-8c44-8314e3e1b7b4
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column phone_number
+		dataType: int64
+		formatString: 0
+		lineageTag: 9f545c84-bec8-437b-a7e7-2d7aab026616
+		summarizeBy: sum
+		sourceColumn: phone_number
+
+		annotation SummarizationSetBy = Automatic
+
+	column email_address
+		dataType: string
+		lineageTag: 41ba6af0-93f4-4e47-9092-287c81d01d68
+		summarizeBy: none
+		sourceColumn: email_address
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_name
+		dataType: string
+		lineageTag: 4f22398a-d8e1-4752-8fef-d0af6c098b29
+		summarizeBy: none
+		sourceColumn: first_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column last_name
+		dataType: string
+		lineageTag: 3981a6d9-8f38-44ae-8347-5905e26bf7cb
+		summarizeBy: none
+		sourceColumn: last_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column phone_type
+		dataType: string
+		lineageTag: 8f2df850-544f-4f89-830b-799541dc7e67
+		summarizeBy: none
+		sourceColumn: phone_type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_nbo_customers = m
+		mode: import
+		source =
+				let
+				    Source = DatabricksMultiCloud.Catalogs("adb-1819084380490284.4.azuredatabricks.net", "/sql/1.0/warehouses/fe882e31ed39de5c", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation=null]),
+				    amavla_dev_central_adbw_Database = Source{[Name="amavla_dev_central_adbw",Kind="Database"]}[Data],
+				    default_Schema = amavla_dev_central_adbw_Database{[Name="default",Kind="Schema"]}[Data],
+				    nbo_customers_Table = default_Schema{[Name="nbocustomers",Kind="Table"]}[Data]
+				in
+				    nbo_customers_Table
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
