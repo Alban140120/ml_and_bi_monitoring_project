@@ -1,9 +1,73 @@
 table Mesures
 	lineageTag: 33a7f01b-e2d7-4088-ae32-bb1fa758ab06
 
-	measure sum_predic_churn = SUM(fact_nbochurnscoringpred[PREDICTION_CHURN])
+	measure TP =
+			
+			CALCULATE(
+			    COUNTROWS(fact_nbotrainchurn),
+			    fact_nbotrainchurn[TARGET_CHURN] = 1,
+			    fact_nbotrainchurn[PREDICTION_CHURN] = 1
+			)
 		formatString: 0
+		displayFolder: Confusion matrix churn
 		lineageTag: 59a7a54d-736b-4b07-b0fb-2d4bac940734
+
+	measure FP =
+			
+			CALCULATE(
+			    COUNTROWS(fact_nbotrainchurn),
+			    fact_nbotrainchurn[TARGET_CHURN] = 0,
+			    fact_nbotrainchurn[PREDICTION_CHURN] = 1
+			)
+		formatString: 0
+		displayFolder: Confusion matrix churn
+		lineageTag: 478e50c8-8862-4a0a-b9ba-a0d4994123c5
+
+	measure FN =
+			
+			CALCULATE(
+			    COUNTROWS(fact_nbotrainchurn),
+			    fact_nbotrainchurn[TARGET_CHURN] = 1,
+			    fact_nbotrainchurn[PREDICTION_CHURN] = 0
+			)
+		formatString: 0
+		displayFolder: Confusion matrix churn
+		lineageTag: 9bc04194-0fec-488a-96bb-195156e4257b
+
+	measure TN =
+			
+			CALCULATE(
+			    COUNTROWS(fact_nbotrainchurn),
+			    fact_nbotrainchurn[TARGET_CHURN] = 0,
+			    fact_nbotrainchurn[PREDICTION_CHURN] = 0
+			)
+		formatString: #,0
+		displayFolder: Confusion matrix churn
+		lineageTag: 92f60a8c-3bc7-47f7-acc0-ba3ceb65efba
+
+	measure 'Recall Churn' =
+			
+			DIVIDE([TP], [TP] + [FN])
+		displayFolder: Churn metrics
+		lineageTag: afd5d113-b352-4c2b-9338-c847e4ebe714
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Precision Churn' =
+			
+			DIVIDE([TP], [TP] + [FP])
+		displayFolder: Churn metrics
+		lineageTag: d528f7ab-7c86-4ef8-85da-0f9906813a55
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure FPR =
+			
+			DIVIDE([FP], [FP] + [TN])
+		displayFolder: Churn metrics
+		lineageTag: 67e174d4-4a9d-417f-8949-4df92f1003ff
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	partition Mesures = m
 		mode: import
