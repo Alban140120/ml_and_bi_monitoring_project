@@ -1,12 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
-  "name": "78d3f3170585dbd47d90",
+  "name": "3ee09cde0e679c24abb7",
   "position": {
-    "x": 494.04182108463795,
-    "y": 210.38076930186133,
-    "z": 0,
-    "height": 300,
-    "width": 300
+    "x": 313.44041699783736,
+    "y": 360.38076930186133,
+    "z": 3,
+    "height": 178.67617973789763,
+    "width": 202.90345834642611,
+    "tabOrder": 3
   },
   "visual": {
     "visualType": "cardVisual",
@@ -22,11 +23,11 @@
                       "Entity": "Mesures"
                     }
                   },
-                  "Property": "sum_predic_churn"
+                  "Property": "FN"
                 }
               },
-              "queryRef": "Mesures.sum_predic_churn",
-              "nativeQueryRef": "sum_predic_churn"
+              "queryRef": "Mesures.FN",
+              "nativeQueryRef": "FN"
             }
           ]
         }
@@ -41,7 +42,7 @@
                     "Entity": "Mesures"
                   }
                 },
-                "Property": "sum_predic_churn"
+                "Property": "FN"
               }
             },
             "direction": "Descending"
@@ -49,6 +50,24 @@
         ],
         "isDefaultSort": true
       }
+    },
+    "objects": {
+      "value": [
+        {
+          "properties": {
+            "horizontalAlignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ]
     },
     "drillFilterOtherVisuals": true
   }
