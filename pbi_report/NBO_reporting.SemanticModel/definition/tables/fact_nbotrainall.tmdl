@@ -1,0 +1,117 @@
+table fact_nbotrainall
+	lineageTag: 0cb5dde4-f1ce-427b-9b7c-93c366c65ee9
+
+	column CUST_NUM
+		dataType: int64
+		formatString: 0
+		lineageTag: 825de320-17a4-4ae7-8036-cdeefbdcf5b9
+		summarizeBy: none
+		sourceColumn: CUST_NUM
+
+		annotation SummarizationSetBy = Automatic
+
+	column YEAR
+		dataType: int64
+		formatString: 0
+		lineageTag: 19740b6e-7aa0-43ec-9146-b8b03d1c80fd
+		summarizeBy: sum
+		sourceColumn: YEAR
+
+		annotation SummarizationSetBy = Automatic
+
+	column MONTH
+		dataType: int64
+		formatString: 0
+		lineageTag: 1f3e752f-c217-4e3f-ab31-11975f3cdb52
+		summarizeBy: sum
+		sourceColumn: MONTH
+
+		annotation SummarizationSetBy = Automatic
+
+	column TARGET
+		dataType: int64
+		formatString: 0
+		lineageTag: e34cb830-addc-4260-ae01-a1899b480875
+		summarizeBy: sum
+		sourceColumn: TARGET
+
+		annotation SummarizationSetBy = Automatic
+
+	column PREDICTION
+		dataType: int64
+		formatString: 0
+		lineageTag: 2f84e53e-2053-4b7d-81ff-afaa0e0ba6c0
+		summarizeBy: sum
+		sourceColumn: PREDICTION
+
+		annotation SummarizationSetBy = Automatic
+
+	column y_proba
+		dataType: double
+		lineageTag: 7198689e-58f3-496c-ac97-019f81856efd
+		summarizeBy: sum
+		sourceColumn: y_proba
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column THRESHOLD_USED
+		dataType: double
+		lineageTag: 4aa481f2-1102-4b80-953d-45c9fa450484
+		summarizeBy: sum
+		sourceColumn: THRESHOLD_USED
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column MODEL_TYPE
+		dataType: string
+		lineageTag: 3ab70fcd-6f7b-4bc7-8b44-983a38dc0a58
+		summarizeBy: none
+		sourceColumn: MODEL_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
+	column Decile =
+			
+			VAR CurrentModel = fact_nbotrainall[MODEL_TYPE]
+			VAR FilteredTable =
+			    FILTER(
+			        ALLSELECTED(fact_nbotrainall),
+			        fact_nbotrainall[MODEL_TYPE] = CurrentModel
+			    )
+			VAR RankValue =
+			    RANKX(
+			        FilteredTable,
+			        fact_nbotrainall[y_proba],
+			        ,
+			        DESC,
+			        Dense
+			    )
+			VAR TotalRows = COUNTROWS(FilteredTable)
+			RETURN
+			    CEILING(RankValue * 10 / TotalRows, 1)
+		dataType: int64
+		formatString: 0
+		lineageTag: 47eb782b-2692-4224-8832-17fe0b2a60fb
+		summarizeBy: sum
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fact_nbotrainall = m
+		mode: import
+		source =
+				let
+				    Source = Table.Combine({fact_nbotrainsport, fact_nbotrainchurn, fact_nbotraincinema}),
+				    #"Colonnes supprimées" = Table.RemoveColumns(Source,{"INTERNET_DURATION_CYCLING_L3M_SECONDES", "INTERNET_DURATION_CYCLING_L3M_DAYS", "INTERNET_RANK_CYCLING_L3M", "INTERNET_DURATION_DISNEY_L3M_SECONDES", "INTERNET_DURATION_DISNEY_L3M_DAYS", "INTERNET_RANK_DISNEY_L3M", "INTERNET_DURATION_FOOTBALL_L3M_SECONDES", "INTERNET_DURATION_FOOTBALL_L3M_DAYS", "INTERNET_RANK_FOOTBALL_L3M", "INTERNET_DURATION_GAMING_L3M_SECONDES", "INTERNET_DURATION_GAMING_L3M_DAYS", "INTERNET_RANK_GAMING_L3M", "INTERNET_DURATION_KIDS_L3M_SECONDES", "INTERNET_DURATION_KIDS_L3M_DAYS", "INTERNET_RANK_KIDS_L3M", "INTERNET_DURATION_NETFLIX_L3M_SECONDES", "INTERNET_DURATION_NETFLIX_L3M_DAYS", "INTERNET_RANK_NETFLIX_L3M", "INTERNET_DURATION_PRICE_COMPARATOR_L3M_SECONDES", "INTERNET_DURATION_PRICE_COMPARATOR_L3M_DAYS", "INTERNET_RANK_PRICE_COMPARATOR_L3M", "INTERNET_DURATION_SOCIAL_MEDIA_L3M_SECONDES", "INTERNET_DURATION_SOCIAL_MEDIA_L3M_DAYS", "INTERNET_RANK_SOCIAL_MEDIA_L3M", "INTERNET_DURATION_TELCO_L3M_SECONDES", "INTERNET_DURATION_TELCO_L3M_DAYS", "INTERNET_RANK_TELCO_L3M", "TV_DURATION_CULTURE_L3M_SECONDES", "TV_DURATION_CULTURE_L3M_DAYS", "TV_RANK_CULTURE_L3M", "TV_DURATION_CYCLING_L3M_SECONDES", "TV_DURATION_CYCLING_L3M_DAYS", "TV_RANK_CYCLING_L3M", "TV_DURATION_DOCUMENTARIES_L3M_SECONDES", "TV_DURATION_DOCUMENTARIES_L3M_DAYS", "TV_RANK_DOCUMENTARIES_L3M", "TV_DURATION_FOOTBALL_L3M_SECONDES", "TV_DURATION_FOOTBALL_L3M_DAYS", "TV_RANK_FOOTBALL_L3M", "TV_DURATION_MOVIES_L3M_SECONDES", "TV_DURATION_MOVIES_L3M_DAYS", "TV_RANK_MOVIES_L3M", "AMOUNT_OUT_OF_BUNDLE_L3M", "NB_DAYS_OUT_OF_BUNDLE_L3M", "AVG_CUST_AGE", "AVG_NB_DAYS_INTERNET_LINE", "AVG_NB_DAYS_TV_LINE", "AVG_NB_MOBILE_SUBS", "AMOUNT_OF_CONTACT_ADMINISTRATIVE_ISSUES_L3M", "AMOUNT_OF_CONTACT_COMPLAINTS_L3M", "JOURNEY_DURATION_ADMINISTRATIVE_ISSUES_L3M_DAYS", "JOURNEY_DURATION_COMPLAINTS_L3M_DAYS", "JOURNEY_DURATION_TECHNICAL_ISSUES_L3M_DAYS", "TOTAL_NUMBER_OF_CONTACTS_L3M", "TOTAL_NUMBER_OF_JOURNEYS_L3M"})
+				in
+				    #"Colonnes supprimées"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

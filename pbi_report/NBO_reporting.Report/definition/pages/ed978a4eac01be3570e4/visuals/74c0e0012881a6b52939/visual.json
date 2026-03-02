@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
-  "name": "78262c8cb305564749ca",
+  "name": "74c0e0012881a6b52939",
   "position": {
     "x": 1129.2291309235047,
-    "y": 503.62973042260751,
-    "z": 10000,
+    "y": 629.53243014060615,
+    "z": 15000,
     "height": 90.4675698593938,
     "width": 150.24078565935042,
-    "tabOrder": 9000
+    "tabOrder": 13000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -23,11 +23,11 @@
                       "Entity": "Mesures"
                     }
                   },
-                  "Property": "Precision"
+                  "Property": "Accuracy"
                 }
               },
-              "queryRef": "Mesures.Precision Churn",
-              "nativeQueryRef": "Precision"
+              "queryRef": "Mesures.Accuracy",
+              "nativeQueryRef": "Accuracy"
             }
           ]
         },
@@ -41,11 +41,11 @@
                       "Entity": "Mesures"
                     }
                   },
-                  "Property": "Precision Tooltip"
+                  "Property": "Accuracy Tooltip"
                 }
               },
-              "queryRef": "Mesures.Precision Tooltip",
-              "nativeQueryRef": "Precision Tooltip"
+              "queryRef": "Mesures.Accuracy Tooltip",
+              "nativeQueryRef": "Accuracy Tooltip"
             }
           ]
         }
@@ -60,7 +60,7 @@
                     "Entity": "Mesures"
                   }
                 },
-                "Property": "Precision"
+                "Property": "Accuracy"
               }
             },
             "direction": "Descending"
@@ -127,7 +127,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Precision : proportion des prédictions positives qui sont correctes. \nFormule : TP / (TP + FP).'"
+                  "Value": "'Accuracy : proportion de toutes les prédictions correctes sur l''ensemble des observations.\nFormule : (TP + TN) / (TP + TN + FP + FN).'"
                 }
               }
             }

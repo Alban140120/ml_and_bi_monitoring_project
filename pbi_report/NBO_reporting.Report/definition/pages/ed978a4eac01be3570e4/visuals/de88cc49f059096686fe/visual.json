@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
   "name": "de88cc49f059096686fe",
   "position": {
-    "x": 969.09114434113962,
-    "y": 449.71885917081011,
-    "z": 10,
-    "height": 149.90628639027005,
-    "width": 202.90345834642611,
-    "tabOrder": 10
+    "x": 1129.2291309235047,
+    "y": 250.80518251198015,
+    "z": 11000,
+    "height": 90.4675698593938,
+    "width": 150.24078565935042,
+    "tabOrder": 10000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -23,11 +23,29 @@
                       "Entity": "Mesures"
                     }
                   },
-                  "Property": "Recall Churn"
+                  "Property": "Recall"
                 }
               },
               "queryRef": "Mesures.Recall Churn",
-              "nativeQueryRef": "Recall Churn"
+              "nativeQueryRef": "Recall"
+            }
+          ]
+        },
+        "Tooltips": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Mesures"
+                    }
+                  },
+                  "Property": "Recall Tooltip"
+                }
+              },
+              "queryRef": "Mesures.Recall Tooltip",
+              "nativeQueryRef": "Recall Tooltip"
             }
           ]
         }
@@ -42,7 +60,7 @@
                     "Entity": "Mesures"
                   }
                 },
-                "Property": "Recall Churn"
+                "Property": "Recall"
               }
             },
             "direction": "Descending"
@@ -61,10 +79,58 @@
                   "Value": "'center'"
                 }
               }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "30D"
+                }
+              }
             }
           },
           "selector": {
             "id": "default"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "visualTooltip": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "showTooltipButton": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeaderTooltip": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Recall (Sensibilité) : proportion des vrais positifs correctement détectés. \nFormule : TP / (TP + FN).'"
+                }
+              }
+            }
           }
         }
       ]

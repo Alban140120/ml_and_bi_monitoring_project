@@ -1,0 +1,373 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "0c4bb91788aa390c5c1a",
+  "position": {
+    "x": 0,
+    "y": 394.18012581593013,
+    "z": 15001,
+    "height": 326.32944842138477,
+    "width": 911.137667869609,
+    "tabOrder": 14001
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_nbotrainall"
+                    }
+                  },
+                  "Property": "Decile"
+                }
+              },
+              "queryRef": "fact_nbotrainall.Decile",
+              "nativeQueryRef": "Decile"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Mesures"
+                    }
+                  },
+                  "Property": "Segment Target"
+                }
+              },
+              "queryRef": "Mesures.Segment_Target",
+              "nativeQueryRef": "Segment Target"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Mesures"
+                    }
+                  },
+                  "Property": "Segment Total"
+                }
+              },
+              "queryRef": "Mesures.Segment_Total",
+              "nativeQueryRef": "Segment Total"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Mesures"
+                    }
+                  },
+                  "Property": "Running Target"
+                }
+              },
+              "queryRef": "Mesures.Running_Target",
+              "nativeQueryRef": "Running Target"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Mesures"
+                    }
+                  },
+                  "Property": "Running Total"
+                }
+              },
+              "queryRef": "Mesures.Running_Total",
+              "nativeQueryRef": "Running Total"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Mesures"
+                    }
+                  },
+                  "Property": "Running Precision"
+                }
+              },
+              "queryRef": "Mesures.Running_Precision",
+              "nativeQueryRef": "Running Precision"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Mesures"
+                    }
+                  },
+                  "Property": "Running Recall"
+                }
+              },
+              "queryRef": "Mesures.Running_Recall",
+              "nativeQueryRef": "Running Recall"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Mesures"
+                    }
+                  },
+                  "Property": "Running Lift"
+                }
+              },
+              "queryRef": "Mesures.Running_Lift",
+              "nativeQueryRef": "Running Lift"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Mesures"
+                    }
+                  },
+                  "Property": "Running F1Score"
+                }
+              },
+              "queryRef": "Mesures.Running_F1Score",
+              "nativeQueryRef": "Running F1Score"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "fact_nbotrainall"
+                  }
+                },
+                "Property": "Decile"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            },
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "grid": [
+        {
+          "properties": {
+            "outlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 1,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "visualTooltip": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Minimal'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Analyze by deciles'"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'center'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "16D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "showTooltipButton": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeaderTooltip": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segment Target :  Nombre réel de clients positifs (TARGET = 1) présents dans ce décile. \nPlus ce chiffre est élevé dans les premiers déciles, plus le modèle concentre correctement les cas à risque en haut du classement.\n\nSegment Total : Nombre total de clients dans ce décile (environ 10% de la population). \nChaque décile représente une tranche de score du plus élevé (Décile 1) au plus faible (Décile 10).\n\nRunning Target : Nombre cumulé de clients positifs capturés jusqu''à ce décile. \nPermet de voir combien de churners seraient détectés si l’on ciblait les X premiers déciles.\n\nRunning Total : Nombre cumulé de clients inclus jusqu''à ce décile. \nReprésente la part de population que l’on déciderait de cibler.\n\nRunning Precision : Proportion de clients réellement positifs parmi ceux ciblés jusqu''à ce décile. \nPlus elle est élevée dans les premiers déciles, plus le modèle est performant pour prioriser les bons clients.\n\nRunning Recall : Part des positifs totaux capturés jusqu''à ce décile. \nIndique combien de churners seraient détectés si l''on ciblait les X premiers déciles.\n\nRunning Lift : Indique combien de fois le modèle est meilleur qu’un ciblage aléatoire. \nUn lift de 3 au Décile 1 signifie que les clients de ce décile ont 3 fois plus de probabilité d’être positifs que la moyenne globale. \nPlus le lift est élevé dans les premiers déciles, plus le modèle apporte de valeur business.\n\nRunning F1Score : Score combinant la précision et le recall. \nUtile pour évaluer l’équilibre entre détecter un maximum de positifs et éviter les faux positifs.'"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "36b947e56e6dd48507d0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "fact_nbotrainall"
+              }
+            },
+            "Property": "Decile"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "93f1275c3894c6155d73",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Mesures"
+              }
+            },
+            "Property": "Running Target"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "4083e552061e00a0b519",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Mesures"
+              }
+            },
+            "Property": "Segment Target"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}
