@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
-  "name": "78262c8cb305564749ca",
+  "name": "290e8fff7be8a5008c59",
   "position": {
     "x": 1129.2291309235047,
-    "y": 503.62973042260751,
-    "z": 10000,
+    "y": 377.2174564672938,
+    "z": 13000,
     "height": 90.4675698593938,
     "width": 150.24078565935042,
-    "tabOrder": 9000
+    "tabOrder": 11000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -23,11 +23,11 @@
                       "Entity": "Mesures"
                     }
                   },
-                  "Property": "Precision"
+                  "Property": "F1"
                 }
               },
-              "queryRef": "Mesures.Precision Churn",
-              "nativeQueryRef": "Precision"
+              "queryRef": "Mesures.F1",
+              "nativeQueryRef": "F1"
             }
           ]
         },
@@ -41,11 +41,11 @@
                       "Entity": "Mesures"
                     }
                   },
-                  "Property": "Precision Tooltip"
+                  "Property": "F1 Tooltip"
                 }
               },
-              "queryRef": "Mesures.Precision Tooltip",
-              "nativeQueryRef": "Precision Tooltip"
+              "queryRef": "Mesures.F1 Tooltip",
+              "nativeQueryRef": "F1 Tooltip"
             }
           ]
         }
@@ -60,7 +60,7 @@
                     "Entity": "Mesures"
                   }
                 },
-                "Property": "Precision"
+                "Property": "F1"
               }
             },
             "direction": "Descending"
@@ -127,7 +127,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Precision : proportion des prédictions positives qui sont correctes. \nFormule : TP / (TP + FP).'"
+                  "Value": "'F1 Score : moyenne harmonique de la précision et du recall, utile pour équilibrer les deux.\nFormule : 2 * (Precision * Recall) / (Precision + Recall).'"
                 }
               }
             }

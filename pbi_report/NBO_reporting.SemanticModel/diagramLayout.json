@@ -4,8 +4,8 @@
     {
       "ordinal": 0,
       "scrollPosition": {
-        "x": 65.228108294115856,
-        "y": 0
+        "x": 345.57018373773275,
+        "y": 5.5513284182574578
       },
       "nodes": [
         {
@@ -101,6 +101,19 @@
           "nodeIndex": "fact_nbotrainsport",
           "size": {
             "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1491.3275223692867,
+            "y": 366.68509630855925
+          },
+          "nodeIndex": "fact_nbotrainall",
+          "nodeLineageTag": "0cb5dde4-f1ce-427b-9b7c-93c366c65ee9",
+          "size": {
+            "height": 272,
             "width": 234
           },
           "zIndex": 0

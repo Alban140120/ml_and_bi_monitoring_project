@@ -4,9 +4,9 @@ table Mesures
 	measure TP =
 			
 			CALCULATE(
-			    COUNTROWS(fact_nbotrainchurn),
-			    fact_nbotrainchurn[TARGET_CHURN] = 1,
-			    fact_nbotrainchurn[PREDICTION_CHURN] = 1
+			    COUNTROWS(fact_nbotrainall),
+			    fact_nbotrainall[TARGET] = 1,
+			    fact_nbotrainall[PREDICTION] = 1
 			)
 		formatString: 0
 		displayFolder: Confusion matrix churn
@@ -15,9 +15,9 @@ table Mesures
 	measure FP =
 			
 			CALCULATE(
-			    COUNTROWS(fact_nbotrainchurn),
-			    fact_nbotrainchurn[TARGET_CHURN] = 0,
-			    fact_nbotrainchurn[PREDICTION_CHURN] = 1
+			    COUNTROWS(fact_nbotrainall),
+			    fact_nbotrainall[TARGET] = 0,
+			    fact_nbotrainall[PREDICTION] = 1
 			)
 		formatString: 0
 		displayFolder: Confusion matrix churn
@@ -26,9 +26,9 @@ table Mesures
 	measure FN =
 			
 			CALCULATE(
-			    COUNTROWS(fact_nbotrainchurn),
-			    fact_nbotrainchurn[TARGET_CHURN] = 1,
-			    fact_nbotrainchurn[PREDICTION_CHURN] = 0
+			    COUNTROWS(fact_nbotrainall),
+			    fact_nbotrainall[TARGET] = 1,
+			    fact_nbotrainall[PREDICTION] = 0
 			)
 		formatString: 0
 		displayFolder: Confusion matrix churn
@@ -37,15 +37,17 @@ table Mesures
 	measure TN =
 			
 			CALCULATE(
-			    COUNTROWS(fact_nbotrainchurn),
-			    fact_nbotrainchurn[TARGET_CHURN] = 0,
-			    fact_nbotrainchurn[PREDICTION_CHURN] = 0
+			    COUNTROWS(fact_nbotrainall),
+			    fact_nbotrainall[TARGET] = 0,
+			    fact_nbotrainall[PREDICTION] = 0
 			)
 		formatString: #,0
 		displayFolder: Confusion matrix churn
 		lineageTag: 92f60a8c-3bc7-47f7-acc0-ba3ceb65efba
 
-	measure 'Recall Churn' =
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure Recall =
 			
 			DIVIDE([TP], [TP] + [FN])
 		displayFolder: Churn metrics
@@ -53,7 +55,7 @@ table Mesures
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
-	measure 'Precision Churn' =
+	measure Precision =
 			
 			DIVIDE([TP], [TP] + [FP])
 		displayFolder: Churn metrics
@@ -68,6 +70,162 @@ table Mesures
 		lineageTag: 67e174d4-4a9d-417f-8949-4df92f1003ff
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure F1 =
+			
+			2 * DIVIDE(
+			    [Precision] * [Recall],
+			    [Precision] + [Recall]
+			)
+		displayFolder: Churn metrics
+		lineageTag: 8e5af033-05b5-4fa9-8c61-31359859bbac
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Dynamic Title' =
+			
+			"Training Performance - " &
+			SELECTEDVALUE(fact_nbotrainall[MODEL_TYPE], "CHURN")
+		displayFolder: Dynamic title
+		lineageTag: fdcb1dc3-64e3-4dfa-a1ec-324ca0dddaf4
+
+	measure 'FPR Tooltip' =
+			
+			"FPR (False Positive Rate) = taux de faux positifs, c'est-à-dire le pourcentage de clients prédits positifs alors qu'ils sont négatifs."
+		displayFolder: Toolip
+		lineageTag: 23aad4c1-8bc7-405f-937b-9db429bfae7c
+
+	measure 'Precision Tooltip' =
+			
+			"Precision = proportion des prédictions positives qui sont correctes. Formule : TP / (TP + FP)."
+		displayFolder: Toolip
+		lineageTag: 1051bf63-6eb9-4731-936d-42f65ae81d5f
+
+	measure 'Recall Tooltip' =
+			
+			"Recall (Sensibilité) = proportion des vrais positifs correctement détectés. Formule : TP / (TP + FN)."
+		displayFolder: Toolip
+		lineageTag: 1d55054e-c1fc-422f-9d9b-851239f919fb
+
+	measure 'F1 Tooltip' =
+			
+			"F1 Score = moyenne harmonique de la précision et du recall, utile pour équilibrer les deux. Formule : 2 * (Precision * Recall) / (Precision + Recall)."
+		displayFolder: Toolip
+		lineageTag: 64968ee4-2afe-48e9-a7d2-c215c510f8f3
+
+	measure Accuracy =
+			
+			DIVIDE(
+			    [TP] + [TN],
+			    [TP] + [TN] + [FP] + [FN],
+			    0
+			)
+		displayFolder: Churn metrics
+		lineageTag: 3bf24389-a9b0-4706-a33f-1bd53a2725ff
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Accuracy Tooltip' =
+			
+			"Accuracy = proportion de toutes les prédictions correctes sur l'ensemble des observations. Formule : (TP + TN) / (TP + TN + FP + FN)."
+		displayFolder: Toolip
+		lineageTag: 2a49f07e-a921-402b-9f64-dcf401ccdf5d
+
+	measure 'Segment Target' = SUM(fact_nbotrainall[TARGET])
+		formatString: 0
+		displayFolder: Analyse déciles
+		lineageTag: f6f10f8b-f1c6-46c7-bbcb-37ac248e4a66
+
+	measure 'Running Target' =
+			
+			CALCULATE(
+			    [Segment Target],
+			    FILTER(
+			        ALLSELECTED(fact_nbotrainall),
+			        fact_nbotrainall[Decile] <= MAX(fact_nbotrainall[Decile])
+			            && fact_nbotrainall[MODEL_TYPE] = SELECTEDVALUE(fact_nbotrainall[MODEL_TYPE])
+			    )
+			)
+		formatString: 0
+		displayFolder: Analyse déciles
+		lineageTag: 4cacc1fc-75b7-4ee1-989c-8093e0e08427
+
+	measure 'Segment Total' =
+			
+			CALCULATE(
+			    COUNTROWS(fact_nbotrainall),
+			    ALLEXCEPT(fact_nbotrainall, fact_nbotrainall[Decile], fact_nbotrainall[MODEL_TYPE])
+			)
+		formatString: 0
+		displayFolder: Analyse déciles
+		lineageTag: 9d8f8844-d09b-4f70-a2fc-ee729052a249
+
+	measure 'Running Total' =
+			
+			CALCULATE(
+			    [Segment Total],
+			    FILTER(
+			        ALL(fact_nbotrainall[Decile]),
+			        fact_nbotrainall[Decile] <= MAX(fact_nbotrainall[Decile])
+			    )
+			)
+		formatString: 0
+		displayFolder: Analyse déciles
+		lineageTag: 04eeb130-ee3f-4734-9e49-1904d2a1e8cc
+
+	measure 'Running Precision' =
+			
+			DIVIDE([Running Target], [Running Total], 0)
+		formatString: 0.00000
+		displayFolder: Analyse déciles
+		lineageTag: 7479a173-742c-4b9c-8933-bc4ffdb948ae
+
+	measure 'Running Recall' =
+			
+			DIVIDE([Running Target], CALCULATE(SUM(fact_nbotrainall[TARGET]), ALL(fact_nbotrainall)), 0)
+		formatString: 0.00000
+		displayFolder: Analyse déciles
+		lineageTag: c9124b91-96d0-4e08-bb07-74fa638bae33
+
+	measure 'Running Lift' =
+			
+			DIVIDE(
+			    [Running Precision],
+			    CALCULATE(AVERAGE(fact_nbotrainall[TARGET]), ALL(fact_nbotrainall)),
+			    0
+			)
+		formatString: 0.00000
+		displayFolder: Analyse déciles
+		lineageTag: 0d8379ab-e121-471f-b33d-7d1c56232b60
+
+	measure 'Running F1Score' =
+			
+			DIVIDE(
+			    2 * [Running Precision] * [Running Recall],
+			    [Running Precision] + [Running Recall],
+			    0
+			)
+		formatString: 0.00000
+		displayFolder: Analyse déciles
+		lineageTag: 0bd329cf-8657-49c8-94ec-ea8d340d8d2c
+
+	measure Decile_Column_Definition =
+			
+			SWITCH(
+			    TRUE(),
+			    SELECTEDVALUE(fact_nbotrainall[Decile]) = "Segment Target", "Nombre de positifs (TARGET=1) dans le décile",
+			    SELECTEDVALUE(fact_nbotrainall[Decile]) = "Segment Total", "Nombre total d'individus dans le décile",
+			    SELECTEDVALUE(fact_nbotrainall[Decile]) = "Running Target", "Cumul des positifs jusqu'au décile courant",
+			    SELECTEDVALUE(fact_nbotrainall[Decile]) = "Running Total", "Cumul du nombre total d'individus jusqu'au décile courant",
+			    SELECTEDVALUE(fact_nbotrainall[Decile]) = "Running Precision", "Précision cumulative = Running_Target / Running_Total",
+			    SELECTEDVALUE(fact_nbotrainall[Decile]) = "Running Recall", "Rappel cumulatif = Running_Target / Total des positifs",
+			    SELECTEDVALUE(fact_nbotrainall[Decile]) = "Running Lift", "Lift cumulatif = Running_Precision / Baseline",
+			    SELECTEDVALUE(fact_nbotrainall[Decile]) = "Running F1Score", "F1 score cumulatif = 2 * (Precision * Recall) / (Precision + Recall)",
+			    "Mesure inconnue"
+			)
+		formatString: 0
+		displayFolder: Toolip
+		lineageTag: 32bc8214-9293-4bc7-92e6-ee68630b6e5f
 
 	partition Mesures = m
 		mode: import

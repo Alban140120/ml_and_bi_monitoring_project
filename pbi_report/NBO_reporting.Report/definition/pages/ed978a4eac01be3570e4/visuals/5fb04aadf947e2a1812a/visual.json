@@ -1,13 +1,13 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.5.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
   "name": "5fb04aadf947e2a1812a",
   "position": {
-    "x": 313.44041699783736,
-    "y": 130.22162252084064,
-    "z": 4,
-    "height": 51.482967043123047,
-    "width": 202.90345834642611,
-    "tabOrder": 4
+    "x": 221.86101086592146,
+    "y": 107.17786783411239,
+    "z": 5000,
+    "height": 51.695754205367884,
+    "width": 153.47177029718591,
+    "tabOrder": 4000
   },
   "visual": {
     "visualType": "textbox",
@@ -21,7 +21,7 @@
                   {
                     "value": "Predicted = 0",
                     "textStyle": {
-                      "fontSize": "20pt"
+                      "fontSize": "16pt"
                     }
                   }
                 ],

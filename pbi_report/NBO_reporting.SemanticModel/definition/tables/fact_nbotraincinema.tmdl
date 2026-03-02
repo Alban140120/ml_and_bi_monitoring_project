@@ -28,21 +28,21 @@ table fact_nbotraincinema
 
 		annotation SummarizationSetBy = Automatic
 
-	column TARGET_CINEMA
+	column TARGET
 		dataType: int64
 		formatString: 0
 		lineageTag: 65fabfe7-0d49-46e8-bb18-72b40cdc1e12
 		summarizeBy: sum
-		sourceColumn: TARGET_CINEMA
+		sourceColumn: TARGET
 
 		annotation SummarizationSetBy = Automatic
 
-	column PREDICTION_CINEMA
+	column PREDICTION
 		dataType: int64
 		formatString: 0
 		lineageTag: 00c2b72a-91c1-4c69-bf95-21e09158cb08
 		summarizeBy: sum
-		sourceColumn: PREDICTION_CINEMA
+		sourceColumn: PREDICTION
 
 		annotation SummarizationSetBy = Automatic
 
@@ -565,6 +565,14 @@ table fact_nbotraincinema
 
 		annotation SummarizationSetBy = Automatic
 
+	column MODEL_TYPE
+		dataType: string
+		lineageTag: c2f79cfb-553e-4c2e-88be-7bfccef4a427
+		summarizeBy: none
+		sourceColumn: MODEL_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
 	partition fact_nbotraincinema = m
 		mode: import
 		source =
@@ -572,9 +580,12 @@ table fact_nbotraincinema
 				    Source = Databricks.Catalogs("adb-1819084380490284.4.azuredatabricks.net", "/sql/1.0/warehouses/fe882e31ed39de5c", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation=null]),
 				    amavla_dev_central_adbw_Database = Source{[Name="amavla_dev_central_adbw",Kind="Database"]}[Data],
 				    default_Schema = amavla_dev_central_adbw_Database{[Name="default",Kind="Schema"]}[Data],
-				    nbotraincinema_Table = default_Schema{[Name="nbotraincinema",Kind="Table"]}[Data]
+				    nbotraincinema_Table = default_Schema{[Name="nbotraincinema",Kind="Table"]}[Data],
+				    #"Personnalisée ajoutée" = Table.AddColumn(nbotraincinema_Table, "MODEL_TYPE", each "CINEMA"),
+				    #"Type modifié" = Table.TransformColumnTypes(#"Personnalisée ajoutée",{{"MODEL_TYPE", type text}}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Type modifié",{{"TARGET_CINEMA", "TARGET"}, {"PREDICTION_CINEMA", "PREDICTION"}})
 				in
-				    nbotraincinema_Table
+				    #"Colonnes renommées"
 
 	annotation PBI_ResultType = Table
 

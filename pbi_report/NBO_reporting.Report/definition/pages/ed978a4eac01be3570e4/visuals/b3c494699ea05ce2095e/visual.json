@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
-  "name": "78262c8cb305564749ca",
+  "name": "b3c494699ea05ce2095e",
   "position": {
-    "x": 1129.2291309235047,
-    "y": 503.62973042260751,
-    "z": 10000,
-    "height": 90.4675698593938,
-    "width": 150.24078565935042,
-    "tabOrder": 9000
+    "x": 0,
+    "y": 0,
+    "z": 14000,
+    "height": 88.85207754047606,
+    "width": 1276.2389319450197,
+    "tabOrder": 12000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -23,50 +23,14 @@
                       "Entity": "Mesures"
                     }
                   },
-                  "Property": "Precision"
+                  "Property": "Dynamic Title"
                 }
               },
-              "queryRef": "Mesures.Precision Churn",
-              "nativeQueryRef": "Precision"
-            }
-          ]
-        },
-        "Tooltips": {
-          "projections": [
-            {
-              "field": {
-                "Measure": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "Mesures"
-                    }
-                  },
-                  "Property": "Precision Tooltip"
-                }
-              },
-              "queryRef": "Mesures.Precision Tooltip",
-              "nativeQueryRef": "Precision Tooltip"
+              "queryRef": "Mesures.Dynamic Title",
+              "nativeQueryRef": "Dynamic Title"
             }
           ]
         }
-      },
-      "sortDefinition": {
-        "sort": [
-          {
-            "field": {
-              "Measure": {
-                "Expression": {
-                  "SourceRef": {
-                    "Entity": "Mesures"
-                  }
-                },
-                "Property": "Precision"
-              }
-            },
-            "direction": "Descending"
-          }
-        ],
-        "isDefaultSort": true
       }
     },
     "objects": {
@@ -80,10 +44,54 @@
                 }
               }
             },
-            "fontSize": {
+            "bold": {
               "expr": {
                 "Literal": {
-                  "Value": "30D"
+                  "Value": "true"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "label": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "cardCalloutArea": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "backgroundFillColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.1
+                    }
+                  }
                 }
               }
             }
@@ -95,39 +103,13 @@
       ]
     },
     "visualContainerObjects": {
-      "visualTooltip": [
+      "visualHeader": [
         {
           "properties": {
             "show": {
               "expr": {
                 "Literal": {
                   "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "visualHeader": [
-        {
-          "properties": {
-            "showTooltipButton": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            }
-          }
-        }
-      ],
-      "visualHeaderTooltip": [
-        {
-          "properties": {
-            "text": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Precision : proportion des prédictions positives qui sont correctes. \nFormule : TP / (TP + FP).'"
                 }
               }
             }

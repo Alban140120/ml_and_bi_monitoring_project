@@ -1,37 +1,38 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
-  "name": "475e54a16e320dcd5921",
+  "name": "e3d68b4351e2e5ca2093",
   "position": {
-    "x": 1129.2291309235047,
+    "x": 562.1913269833758,
     "y": 124.39290855666648,
-    "z": 9000,
-    "height": 90.4675698593938,
-    "width": 150.24078565935042,
-    "tabOrder": 8000
+    "z": 15002,
+    "height": 235.86187856199098,
+    "width": 547.65189611311609,
+    "tabOrder": 14002
   },
   "visual": {
-    "visualType": "cardVisual",
+    "visualType": "lineChart",
     "query": {
       "queryState": {
-        "Data": {
+        "Category": {
           "projections": [
             {
               "field": {
-                "Measure": {
+                "Column": {
                   "Expression": {
                     "SourceRef": {
-                      "Entity": "Mesures"
+                      "Entity": "fact_nbotrainall"
                     }
                   },
-                  "Property": "FPR"
+                  "Property": "Decile"
                 }
               },
-              "queryRef": "Mesures.FPR",
-              "nativeQueryRef": "FPR"
+              "queryRef": "fact_nbotrainall.Decile",
+              "nativeQueryRef": "Decile",
+              "active": true
             }
           ]
         },
-        "Tooltips": {
+        "Y": {
           "projections": [
             {
               "field": {
@@ -41,11 +42,11 @@
                       "Entity": "Mesures"
                     }
                   },
-                  "Property": "FPR Tooltip"
+                  "Property": "Running Lift"
                 }
               },
-              "queryRef": "Mesures.FPR Tooltip",
-              "nativeQueryRef": "FPR Tooltip"
+              "queryRef": "Mesures.Running Lift",
+              "nativeQueryRef": "Running Lift"
             }
           ]
         }
@@ -60,7 +61,7 @@
                     "Entity": "Mesures"
                   }
                 },
-                "Property": "FPR"
+                "Property": "Running Lift"
               }
             },
             "direction": "Descending"
@@ -70,51 +71,84 @@
       }
     },
     "objects": {
-      "value": [
-        {
-          "properties": {
-            "horizontalAlignment": {
-              "expr": {
-                "Literal": {
-                  "Value": "'center'"
-                }
-              }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "30D"
-                }
-              }
-            }
-          },
-          "selector": {
-            "id": "default"
-          }
-        }
-      ]
-    },
-    "visualContainerObjects": {
-      "visualTooltip": [
+      "y1AxisReferenceLine": [
         {
           "properties": {
             "show": {
               "expr": {
                 "Literal": {
-                  "Value": "false"
+                  "Value": "true"
                 }
               }
             },
-            "type": {
+            "displayName": {
               "expr": {
                 "Literal": {
-                  "Value": "'Canvas'"
+                  "Value": "'Ligne de constante de l''axe Y 1'"
+                }
+              }
+            },
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
+                }
+              }
+            },
+            "lineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 9,
+                      "Percent": 0.2
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "1"
+          }
+        }
+      ],
+      "zoom": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }
           }
         }
       ],
+      "dataPoint": [
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 3,
+                      "Percent": -0.25
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Mesures.Running Lift"
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
       "visualHeader": [
         {
           "properties": {
@@ -134,7 +168,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'FPR (False Positive Rate) : taux de faux positifs, c''est-à-dire le pourcentage de clients prédits positifs alors qu''ils sont négatifs.'"
+                  "Value": "'Indique combien de fois le modèle est meilleur qu’un ciblage aléatoire. \nUn lift de 3 au Décile 1 signifie que les clients de ce décile ont 3 fois plus de probabilité d’être positifs que la moyenne globale. \nPlus le lift est élevé dans les premiers déciles, plus le modèle apporte de valeur business.'"
                 }
               }
             }

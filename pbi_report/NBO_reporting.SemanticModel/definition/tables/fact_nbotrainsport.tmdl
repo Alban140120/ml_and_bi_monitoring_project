@@ -28,21 +28,21 @@ table fact_nbotrainsport
 
 		annotation SummarizationSetBy = Automatic
 
-	column TARGET_SPORT
+	column TARGET
 		dataType: int64
 		formatString: 0
 		lineageTag: 4dc54c72-337e-451b-869f-6a55437bad31
 		summarizeBy: sum
-		sourceColumn: TARGET_SPORT
+		sourceColumn: TARGET
 
 		annotation SummarizationSetBy = Automatic
 
-	column PREDICTION_SPORT
+	column PREDICTION
 		dataType: int64
 		formatString: 0
 		lineageTag: ad689b45-51dc-498a-bf41-d1c3a2bac9c7
 		summarizeBy: sum
-		sourceColumn: PREDICTION_SPORT
+		sourceColumn: PREDICTION
 
 		annotation SummarizationSetBy = Automatic
 
@@ -565,6 +565,14 @@ table fact_nbotrainsport
 
 		annotation SummarizationSetBy = Automatic
 
+	column MODEL_TYPE
+		dataType: string
+		lineageTag: 5565cef7-bf19-476a-9f06-93990e26e008
+		summarizeBy: none
+		sourceColumn: MODEL_TYPE
+
+		annotation SummarizationSetBy = Automatic
+
 	partition fact_nbotrainsport = m
 		mode: import
 		source =
@@ -572,9 +580,12 @@ table fact_nbotrainsport
 				    Source = Databricks.Catalogs("adb-1819084380490284.4.azuredatabricks.net", "/sql/1.0/warehouses/fe882e31ed39de5c", [Catalog=null, Database=null, QueryTags=null, EnableAutomaticProxyDiscovery=null, Implementation=null]),
 				    amavla_dev_central_adbw_Database = Source{[Name="amavla_dev_central_adbw",Kind="Database"]}[Data],
 				    default_Schema = amavla_dev_central_adbw_Database{[Name="default",Kind="Schema"]}[Data],
-				    nbotrainsport_Table = default_Schema{[Name="nbotrainsport",Kind="Table"]}[Data]
+				    nbotrainsport_Table = default_Schema{[Name="nbotrainsport",Kind="Table"]}[Data],
+				    #"Personnalisée ajoutée" = Table.AddColumn(nbotrainsport_Table, "MODEL_TYPE", each "SPORT"),
+				    #"Type modifié" = Table.TransformColumnTypes(#"Personnalisée ajoutée",{{"MODEL_TYPE", type text}}),
+				    #"Colonnes renommées" = Table.RenameColumns(#"Type modifié",{{"TARGET_SPORT", "TARGET"}, {"PREDICTION_SPORT", "PREDICTION"}})
 				in
-				    nbotrainsport_Table
+				    #"Colonnes renommées"
 
 	annotation PBI_ResultType = Table
 
