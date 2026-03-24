@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "475e54a16e320dcd5921",
   "position": {
-    "x": 1129.2291309235047,
-    "y": 124.39290855666648,
-    "z": 9000,
-    "height": 90.4675698593938,
-    "width": 150.24078565935042,
+    "x": 1129.596865122641,
+    "y": 107.50854882534519,
+    "z": 20000,
+    "height": 90.85229478198184,
+    "width": 149.90628639027005,
     "tabOrder": 8000
   },
   "visual": {
@@ -73,17 +73,38 @@
       "value": [
         {
           "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "30D"
+                }
+              }
+            },
             "horizontalAlignment": {
               "expr": {
                 "Literal": {
                   "Value": "'center'"
                 }
               }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "30D"
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "fillCustom": [
+        {
+          "properties": {
+            "fillColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.1
+                    }
+                  }
                 }
               }
             }
@@ -95,26 +116,6 @@
       ]
     },
     "visualContainerObjects": {
-      "visualTooltip": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            },
-            "type": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Canvas'"
-                }
-              }
-            }
-          }
-        }
-      ],
       "visualHeader": [
         {
           "properties": {
@@ -134,7 +135,79 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'FPR (False Positive Rate) : taux de faux positifs, c''est-à-dire le pourcentage de clients prédits positifs alors qu''ils sont négatifs.'"
+                  "Value": "'Le FPR (False Positive Rate) mesure la proportion de clients non concernés que le modèle identifie à tort comme positifs.\n\n• FPR élevé → beaucoup de faux alertes\n• FPR faible → peu de faux positifs\n\nInterprétation :\nUn FPR élevé peut entraîner des actions inutiles (ex : contacter des clients non concernés), ce qui peut générer des coûts ou dégrader l’expérience client.'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.1
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "20D"
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
                 }
               }
             }

@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "de88cc49f059096686fe",
   "position": {
-    "x": 1129.2291309235047,
-    "y": 250.80518251198015,
-    "z": 11000,
-    "height": 90.4675698593938,
-    "width": 150.24078565935042,
+    "x": 1129.896907216495,
+    "y": 208.64743777245957,
+    "z": 20500,
+    "height": 90.721649484536087,
+    "width": 150.10309278350516,
     "tabOrder": 10000
   },
   "visual": {
@@ -73,17 +73,38 @@
       "value": [
         {
           "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "30D"
+                }
+              }
+            },
             "horizontalAlignment": {
               "expr": {
                 "Literal": {
                   "Value": "'center'"
                 }
               }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "30D"
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "fillCustom": [
+        {
+          "properties": {
+            "fillColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.1
+                    }
+                  }
                 }
               }
             }
@@ -95,19 +116,6 @@
       ]
     },
     "visualContainerObjects": {
-      "visualTooltip": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
       "visualHeader": [
         {
           "properties": {
@@ -127,7 +135,79 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Recall (Sensibilité) : proportion des vrais positifs correctement détectés. \nFormule : TP / (TP + FN).'"
+                  "Value": "'Le Recall (ou sensibilité) mesure la capacité du modèle à détecter les vrais positifs.\n\n• Recall élevé → le modèle capture la majorité des cas à détecter\n• Recall faible → le modèle passe à côté de nombreux cas importants\n\nInterprétation :\nUn recall élevé est essentiel lorsque manquer un cas est coûteux.'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.1
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "20D"
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
                 }
               }
             }
