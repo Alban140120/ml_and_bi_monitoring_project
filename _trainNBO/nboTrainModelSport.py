@@ -274,7 +274,7 @@ y_proba = model_sport.predict_proba(X_test)[:, 1]
 auc_score = roc_auc_score(y_test, y_proba)
 print(f"\nAUC = {auc_score:.4f}")
 
-threshold = 0.16
+threshold = 0.01
 y_pred = (y_proba >= threshold).astype(int)
 
 print(f"\n===== Metrics (threshold={threshold}) =====")
