@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "290e8fff7be8a5008c59",
   "position": {
-    "x": 1129.2291309235047,
-    "y": 377.2174564672938,
-    "z": 13000,
-    "height": 90.4675698593938,
-    "width": 150.24078565935042,
+    "x": 1129.896907216495,
+    "y": 309.65568142212817,
+    "z": 21000,
+    "height": 90.721649484536087,
+    "width": 150.10309278350516,
     "tabOrder": 11000
   },
   "visual": {
@@ -73,17 +73,38 @@
       "value": [
         {
           "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "30D"
+                }
+              }
+            },
             "horizontalAlignment": {
               "expr": {
                 "Literal": {
                   "Value": "'center'"
                 }
               }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "30D"
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "fillCustom": [
+        {
+          "properties": {
+            "fillColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.1
+                    }
+                  }
                 }
               }
             }
@@ -95,19 +116,6 @@
       ]
     },
     "visualContainerObjects": {
-      "visualTooltip": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
       "visualHeader": [
         {
           "properties": {
@@ -127,7 +135,79 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'F1 Score : moyenne harmonique de la précision et du recall, utile pour équilibrer les deux.\nFormule : 2 * (Precision * Recall) / (Precision + Recall).'"
+                  "Value": "'Le F1 Score est un équilibre entre la précision et le recall.\n\n• Élevé → bon compromis entre détection et fiabilité\n• Faible → déséquilibre (trop de faux positifs ou trop de cas manqués)\n\nInterprétation :\nLe F1 Score est utile lorsque l’on veut un modèle globalement performant sans privilégier uniquement la précision ou le recall.'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.1
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "20D"
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
                 }
               }
             }

@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "822bc321e1d3d78d5bb1",
   "position": {
-    "x": 0,
-    "y": 393.693277388588,
-    "z": 12000,
-    "height": 74.1960407386185,
-    "width": 187.76140921609581,
+    "x": 0.82701428530856447,
+    "y": 385.979381443299,
+    "z": 10000,
+    "height": 74.226804123711347,
+    "width": 166.5979381443299,
     "tabOrder": 14000
   },
   "visual": {
@@ -94,7 +94,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'CHURN'"
+                                "Value": "'CINEMA'"
                               }
                             }
                           ]

@@ -280,45 +280,42 @@ table Mesures
 	measure AUC =
 			
 			VAR Points =
-			    SUMMARIZE(
-			        fact_nbotrainall,
-			        fact_nbotrainall[Decile],
+			    ADDCOLUMNS(
+			        SUMMARIZE(
+			            fact_nbotrainall,
+			            fact_nbotrainall[Decile]
+			        ),
 			        "TPR", [Running Recall],
 			        "FPR", [Running FPR]
 			    )
 			
-			VAR PointsWithIndex =
+			VAR PointsRanked =
 			    ADDCOLUMNS(
 			        Points,
-			        "NextFPR",
-			            CALCULATE(
-			                MINX(
-			                    FILTER(
-			                        Points,
-			                        fact_nbotrainall[Decile] > EARLIER(fact_nbotrainall[Decile])
-			                    ),
-			                    [FPR]
-			                )
-			            ),
-			        "NextTPR",
-			            CALCULATE(
-			                MINX(
-			                    FILTER(
-			                        Points,
-			                        fact_nbotrainall[Decile] > EARLIER(fact_nbotrainall[Decile])
-			                    ),
-			                    [TPR]
-			                )
-			            )
+			        "RankDecile",
+			            RANKX(Points, fact_nbotrainall[Decile], , ASC)
 			    )
 			
 			RETURN
 			SUMX(
-			    PointsWithIndex,
+			    PointsRanked,
+			    VAR CurrentRank = [RankDecile]
+			
 			    VAR x1 = [FPR]
-			    VAR x2 = [NextFPR]
 			    VAR y1 = [TPR]
-			    VAR y2 = [NextTPR]
+			
+			    VAR x2 =
+			        MAXX(
+			            FILTER(PointsRanked, [RankDecile] = CurrentRank + 1),
+			            [FPR]
+			        )
+			
+			    VAR y2 =
+			        MAXX(
+			            FILTER(PointsRanked, [RankDecile] = CurrentRank + 1),
+			            [TPR]
+			        )
+			
 			    RETURN
 			        IF(
 			            NOT(ISBLANK(x2)),
@@ -328,6 +325,8 @@ table Mesures
 			)
 		displayFolder: Churn metrics
 		lineageTag: 2c6273a2-876a-46f2-b6f8-2d05c0a7960e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	partition Mesures = m
 		mode: import

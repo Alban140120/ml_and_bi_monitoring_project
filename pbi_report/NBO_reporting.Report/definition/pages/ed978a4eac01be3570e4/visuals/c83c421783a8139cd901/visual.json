@@ -1,19 +1,38 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
-  "name": "ff43878325d7527baace",
+  "name": "c83c421783a8139cd901",
   "position": {
-    "x": 316.10663123495823,
-    "y": 169.08654978450312,
-    "z": 2000,
-    "height": 100.16052377290028,
-    "width": 115,
-    "tabOrder": 2000
+    "x": 492.11659673573496,
+    "y": 107.50854882534519,
+    "z": 18000,
+    "height": 266.50006469381339,
+    "width": 625.36662908264168,
+    "tabOrder": 18000
   },
   "visual": {
-    "visualType": "cardVisual",
+    "visualType": "lineChart",
     "query": {
       "queryState": {
-        "Data": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "fact_nbotrainall"
+                    }
+                  },
+                  "Property": "Decile"
+                }
+              },
+              "queryRef": "fact_nbotrainall.Decile",
+              "nativeQueryRef": "Somme de Decile",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
           "projections": [
             {
               "field": {
@@ -23,11 +42,27 @@
                       "Entity": "Mesures"
                     }
                   },
-                  "Property": "FP"
+                  "Property": "Running FPR"
                 }
               },
-              "queryRef": "Mesures.FP",
-              "nativeQueryRef": "FP"
+              "queryRef": "Mesures.Running FPR",
+              "nativeQueryRef": "Random",
+              "displayName": "Random"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Mesures"
+                    }
+                  },
+                  "Property": "Running Recall"
+                }
+              },
+              "queryRef": "Mesures.Running Recall",
+              "nativeQueryRef": "AUC",
+              "displayName": "AUC"
             }
           ]
         }
@@ -42,7 +77,7 @@
                     "Entity": "Mesures"
                   }
                 },
-                "Property": "FP"
+                "Property": "Running FPR"
               }
             },
             "direction": "Descending"
@@ -52,47 +87,29 @@
       }
     },
     "objects": {
-      "value": [
+      "zoom": [
         {
           "properties": {
-            "fontSize": {
+            "show": {
               "expr": {
                 "Literal": {
-                  "Value": "30D"
-                }
-              }
-            },
-            "horizontalAlignment": {
-              "expr": {
-                "Literal": {
-                  "Value": "'center'"
+                  "Value": "true"
                 }
               }
             }
-          },
-          "selector": {
-            "id": "default"
           }
         }
       ],
-      "fillCustom": [
+      "legend": [
         {
           "properties": {
-            "fillColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 0,
-                      "Percent": -0.1
-                    }
-                  }
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
                 }
               }
             }
-          },
-          "selector": {
-            "id": "default"
           }
         }
       ]
@@ -105,6 +122,13 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'AUC'"
                 }
               }
             }
@@ -189,7 +213,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Indique combien de fois le modèle est meilleur qu’un ciblage aléatoire. \nUn lift de 3 au Décile 1 signifie que les clients de ce décile ont 3 fois plus de probabilité d’être positifs que la moyenne globale. \nPlus le lift est élevé dans les premiers déciles, plus le modèle apporte de valeur business.'"
+                  "Value": "'La courbe ROC (Receiver Operating Characteristic) montre le compromis entre :\n\n• Le taux de détection des positifs (Recall / TPR)\n• Le taux de faux positifs (FPR)\n\nChaque point correspond à un seuil de décision différent.\n\nComment lire la courbe :\n• Plus la courbe est proche du coin en haut à gauche → meilleur modèle\n• Une courbe proche de la diagonale → modèle peu performant (aléatoire)\n• Une courbe en dessous de la diagonale → modèle mauvais\n\nL’objectif est de maximiser le recall tout en minimisant les faux positifs.'"
                 }
               }
             }

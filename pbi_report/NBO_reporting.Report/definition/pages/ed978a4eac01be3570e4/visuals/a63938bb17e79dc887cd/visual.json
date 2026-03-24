@@ -1,13 +1,13 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
-  "name": "ff43878325d7527baace",
+  "name": "a63938bb17e79dc887cd",
   "position": {
-    "x": 316.10663123495823,
-    "y": 169.08654978450312,
-    "z": 2000,
-    "height": 100.16052377290028,
-    "width": 115,
-    "tabOrder": 2000
+    "x": 1129.896907216495,
+    "y": 611.958762886598,
+    "z": 22500,
+    "height": 100.61855670103094,
+    "width": 150,
+    "tabOrder": 19000
   },
   "visual": {
     "visualType": "cardVisual",
@@ -23,11 +23,11 @@
                       "Entity": "Mesures"
                     }
                   },
-                  "Property": "FP"
+                  "Property": "AUC"
                 }
               },
-              "queryRef": "Mesures.FP",
-              "nativeQueryRef": "FP"
+              "queryRef": "Mesures.AUC",
+              "nativeQueryRef": "AUC"
             }
           ]
         }
@@ -42,7 +42,7 @@
                     "Entity": "Mesures"
                   }
                 },
-                "Property": "FP"
+                "Property": "AUC"
               }
             },
             "direction": "Descending"
@@ -52,6 +52,27 @@
       }
     },
     "objects": {
+      "fillCustom": [
+        {
+          "properties": {
+            "fillColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
       "value": [
         {
           "properties": {
@@ -66,27 +87,6 @@
               "expr": {
                 "Literal": {
                   "Value": "'center'"
-                }
-              }
-            }
-          },
-          "selector": {
-            "id": "default"
-          }
-        }
-      ],
-      "fillCustom": [
-        {
-          "properties": {
-            "fillColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 0,
-                      "Percent": -0.1
-                    }
-                  }
                 }
               }
             }
@@ -189,7 +189,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Indique combien de fois le modèle est meilleur qu’un ciblage aléatoire. \nUn lift de 3 au Décile 1 signifie que les clients de ce décile ont 3 fois plus de probabilité d’être positifs que la moyenne globale. \nPlus le lift est élevé dans les premiers déciles, plus le modèle apporte de valeur business.'"
+                  "Value": "'L’AUC (Area Under the Curve) mesure la capacité globale du modèle à distinguer les clients positifs des négatifs.\n\n• 0.5 → Modèle aléatoire (aucune capacité de discrimination)\n\nPlus l’AUC est élevée, plus le modèle est performant pour classer correctement les individus, indépendamment du seuil choisi.'"
                 }
               }
             }

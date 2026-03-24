@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "e3d68b4351e2e5ca2093",
   "position": {
-    "x": 445.17624443171104,
-    "y": 124.16480286870852,
-    "z": 15002,
-    "height": 236.2159664331528,
-    "width": 664.73595682150051,
-    "tabOrder": 14002
+    "x": 492.11659673573496,
+    "y": 107.50854882534519,
+    "z": 15000,
+    "height": 266.50006469381339,
+    "width": 625.36662908264168,
+    "tabOrder": 16000
   },
   "visual": {
     "visualType": "lineChart",
@@ -32,9 +32,6 @@
             }
           ]
         },
-        "Series": {
-          "projections": []
-        },
         "Y": {
           "projections": [
             {
@@ -45,12 +42,12 @@
                       "Entity": "Mesures"
                     }
                   },
-                  "Property": "Running Lift"
+                  "Property": "Running Precision"
                 }
               },
-              "queryRef": "Mesures.Running Lift",
-              "nativeQueryRef": "Running Lift",
-              "displayName": "Running Lift"
+              "queryRef": "Mesures.Running Precision",
+              "nativeQueryRef": "Running Precision",
+              "displayName": "Running Precision"
             }
           ],
           "fieldParameters": [
@@ -81,7 +78,7 @@
                     "Entity": "Mesures"
                   }
                 },
-                "Property": "Running Lift"
+                "Property": "Running Precision"
               }
             },
             "direction": "Descending"
@@ -144,8 +141,47 @@
             }
           }
         }
+      ],
+      "background": [
+        {
+          "properties": {
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "20D"
+                }
+              }
+            }
+          }
+        }
       ]
     },
     "drillFilterOtherVisuals": true
-  }
+  },
+  "isHidden": true
 }

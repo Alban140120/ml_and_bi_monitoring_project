@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "78262c8cb305564749ca",
   "position": {
-    "x": 1129.2291309235047,
-    "y": 503.62973042260751,
-    "z": 10000,
-    "height": 90.4675698593938,
-    "width": 150.24078565935042,
+    "x": 1129.896907216495,
+    "y": 410.66392507179683,
+    "z": 21500,
+    "height": 90.721649484536087,
+    "width": 150.10309278350516,
     "tabOrder": 9000
   },
   "visual": {
@@ -73,17 +73,38 @@
       "value": [
         {
           "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "30D"
+                }
+              }
+            },
             "horizontalAlignment": {
               "expr": {
                 "Literal": {
                   "Value": "'center'"
                 }
               }
-            },
-            "fontSize": {
-              "expr": {
-                "Literal": {
-                  "Value": "30D"
+            }
+          },
+          "selector": {
+            "id": "default"
+          }
+        }
+      ],
+      "fillCustom": [
+        {
+          "properties": {
+            "fillColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.1
+                    }
+                  }
                 }
               }
             }
@@ -95,19 +116,6 @@
       ]
     },
     "visualContainerObjects": {
-      "visualTooltip": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "false"
-                }
-              }
-            }
-          }
-        }
-      ],
       "visualHeader": [
         {
           "properties": {
@@ -127,7 +135,79 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Precision : proportion des prédictions positives qui sont correctes. \nFormule : TP / (TP + FP).'"
+                  "Value": "'La Precision mesure la proportion de prédictions positives qui sont réellement correctes.\n\n• Precision élevée → peu de faux positifs\n• Precision faible → beaucoup de faux positifs\n\nInterprétation :\nUne précision élevée signifie que les actions ciblées (ex : campagnes) sont bien dirigées et efficaces.'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.1
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "20D"
+                }
+              }
+            },
+            "width": {
+              "expr": {
+                "Literal": {
+                  "Value": "1D"
                 }
               }
             }

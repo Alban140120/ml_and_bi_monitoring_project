@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "08bea52608a1821f69e8",
   "position": {
-    "x": 0,
-    "y": 504.23023603999923,
-    "z": 15003,
-    "height": 74.1960407386185,
-    "width": 187.76140921609581,
-    "tabOrder": 14003
+    "x": 0.82019823350657362,
+    "y": 522.97520661157034,
+    "z": 16000,
+    "height": 74.049586776859513,
+    "width": 166.61157024793388,
+    "tabOrder": 17000
   },
   "visual": {
     "visualType": "slicer",
@@ -81,7 +81,7 @@
                           [
                             {
                               "Literal": {
-                                "Value": "'''Mesures''[Running Lift]'"
+                                "Value": "'''Mesures''[Running Precision]'"
                               }
                             }
                           ]
@@ -109,7 +109,7 @@
                                 "0": [
                                   {
                                     "Literal": {
-                                      "Value": "'''Mesures''[Running Lift]'"
+                                      "Value": "'''Mesures''[Running Precision]'"
                                     }
                                   }
                                 ]
@@ -133,7 +133,7 @@
                         },
                         "valueMap": [
                           {
-                            "0": "Running Lift"
+                            "0": "Running Precision"
                           }
                         ]
                       }
