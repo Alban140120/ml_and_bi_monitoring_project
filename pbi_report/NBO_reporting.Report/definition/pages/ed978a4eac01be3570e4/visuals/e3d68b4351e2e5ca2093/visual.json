@@ -1,12 +1,12 @@
 {
-  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "e3d68b4351e2e5ca2093",
   "position": {
-    "x": 562.1913269833758,
-    "y": 124.39290855666648,
+    "x": 445.17624443171104,
+    "y": 124.16480286870852,
     "z": 15002,
-    "height": 235.86187856199098,
-    "width": 547.65189611311609,
+    "height": 236.2159664331528,
+    "width": 664.73595682150051,
     "tabOrder": 14002
   },
   "visual": {
@@ -32,6 +32,9 @@
             }
           ]
         },
+        "Series": {
+          "projections": []
+        },
         "Y": {
           "projections": [
             {
@@ -46,7 +49,24 @@
                 }
               },
               "queryRef": "Mesures.Running Lift",
-              "nativeQueryRef": "Running Lift"
+              "nativeQueryRef": "Running Lift",
+              "displayName": "Running Lift"
+            }
+          ],
+          "fieldParameters": [
+            {
+              "parameterExpr": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Paramètre"
+                    }
+                  },
+                  "Property": "Paramètre"
+                }
+              },
+              "index": 0,
+              "length": 1
             }
           ]
         }
@@ -71,48 +91,6 @@
       }
     },
     "objects": {
-      "y1AxisReferenceLine": [
-        {
-          "properties": {
-            "show": {
-              "expr": {
-                "Literal": {
-                  "Value": "true"
-                }
-              }
-            },
-            "displayName": {
-              "expr": {
-                "Literal": {
-                  "Value": "'Ligne de constante de l''axe Y 1'"
-                }
-              }
-            },
-            "value": {
-              "expr": {
-                "Literal": {
-                  "Value": "1D"
-                }
-              }
-            },
-            "lineColor": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 9,
-                      "Percent": 0.2
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "selector": {
-            "id": "1"
-          }
-        }
-      ],
       "zoom": [
         {
           "properties": {
@@ -126,24 +104,16 @@
           }
         }
       ],
-      "dataPoint": [
+      "valueAxis": [
         {
           "properties": {
-            "fill": {
-              "solid": {
-                "color": {
-                  "expr": {
-                    "ThemeDataColor": {
-                      "ColorId": 3,
-                      "Percent": -0.25
-                    }
-                  }
+            "start": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }
-          },
-          "selector": {
-            "metadata": "Mesures.Running Lift"
           }
         }
       ]

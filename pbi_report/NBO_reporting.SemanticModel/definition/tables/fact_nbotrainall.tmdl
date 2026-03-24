@@ -77,28 +77,43 @@ table fact_nbotrainall
 	column Decile =
 			
 			VAR CurrentModel = fact_nbotrainall[MODEL_TYPE]
-			VAR FilteredTable =
-			    FILTER(
-			        ALLSELECTED(fact_nbotrainall),
-			        fact_nbotrainall[MODEL_TYPE] = CurrentModel
+			VAR TotalRows =
+			    CALCULATE(
+			        COUNTROWS(fact_nbotrainall),
+			        FILTER(
+			            ALL(fact_nbotrainall),
+			            fact_nbotrainall[MODEL_TYPE] = CurrentModel
+			        )
 			    )
-			VAR RankValue =
-			    RANKX(
-			        FilteredTable,
-			        fact_nbotrainall[y_proba],
-			        ,
-			        DESC,
-			        Dense
-			    )
-			VAR TotalRows = COUNTROWS(FilteredTable)
+			VAR RankValue = fact_nbotrainall[Rank_Proba]
 			RETURN
-			    CEILING(RankValue * 10 / TotalRows, 1)
+			INT( (RankValue - 1) * 20 / TotalRows ) + 1
 		dataType: int64
 		formatString: 0
 		lineageTag: 47eb782b-2692-4224-8832-17fe0b2a60fb
 		summarizeBy: sum
 
 		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Rank_Proba =
+			
+			VAR CurrentModel = fact_nbotrainall[MODEL_TYPE]
+			RETURN
+			RANKX(
+			    FILTER(
+			        ALL(fact_nbotrainall),
+			        fact_nbotrainall[MODEL_TYPE] = CurrentModel
+			    ),
+			    fact_nbotrainall[y_proba],
+			    ,
+			    DESC,
+			    SKIP   -- ⚠️ IMPORTANT (pas DENSE)
+			)
+		formatString: 0
+		lineageTag: 83e3e4f8-80e3-4795-82dd-82a8f91478ec
+		summarizeBy: sum
 
 		annotation SummarizationSetBy = Automatic
 

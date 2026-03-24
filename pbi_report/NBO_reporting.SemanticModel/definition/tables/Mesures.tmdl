@@ -165,8 +165,9 @@ table Mesures
 			CALCULATE(
 			    [Segment Total],
 			    FILTER(
-			        ALL(fact_nbotrainall[Decile]),
+			        ALL(fact_nbotrainall),
 			        fact_nbotrainall[Decile] <= MAX(fact_nbotrainall[Decile])
+			            && fact_nbotrainall[MODEL_TYPE] = SELECTEDVALUE(fact_nbotrainall[MODEL_TYPE])
 			    )
 			)
 		formatString: 0
@@ -182,18 +183,19 @@ table Mesures
 
 	measure 'Running Recall' =
 			
-			DIVIDE([Running Target], CALCULATE(SUM(fact_nbotrainall[TARGET]), ALL(fact_nbotrainall)), 0)
+			DIVIDE(
+			    [Running Target],
+			    CALCULATE(
+			        SUM(fact_nbotrainall[TARGET]),
+			        ALLEXCEPT(fact_nbotrainall, fact_nbotrainall[MODEL_TYPE])
+			    ),
+			    0
+			)
 		formatString: 0.00000
 		displayFolder: Analyse déciles
 		lineageTag: c9124b91-96d0-4e08-bb07-74fa638bae33
 
-	measure 'Running Lift' =
-			
-			DIVIDE(
-			    [Running Precision],
-			    CALCULATE(AVERAGE(fact_nbotrainall[TARGET]), ALL(fact_nbotrainall)),
-			    0
-			)
+	measure 'Running Lift' = DIVIDE([Running Precision], [Baseline], 0)
 		formatString: 0.00000
 		displayFolder: Analyse déciles
 		lineageTag: 0d8379ab-e121-471f-b33d-7d1c56232b60
@@ -226,6 +228,106 @@ table Mesures
 		formatString: 0
 		displayFolder: Toolip
 		lineageTag: 32bc8214-9293-4bc7-92e6-ee68630b6e5f
+
+	measure Baseline =
+			
+			CALCULATE(
+			    AVERAGE(fact_nbotrainall[TARGET]),
+			    FILTER(
+			        ALL(fact_nbotrainall),
+			        fact_nbotrainall[MODEL_TYPE] = SELECTEDVALUE(fact_nbotrainall[MODEL_TYPE])
+			    )
+			)
+		displayFolder: Analyse déciles
+		lineageTag: 54f0a727-5150-41b2-97d9-cb1e602305d2
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Running FP' =
+			
+			CALCULATE(
+			    COUNTROWS(fact_nbotrainall),
+			    fact_nbotrainall[TARGET] = 0,
+			    fact_nbotrainall[Decile] <= MAX(fact_nbotrainall[Decile])
+			)
+		formatString: 0
+		displayFolder: Churn metrics
+		lineageTag: 205b3899-ae45-4b0b-8266-4f2396080b8d
+
+	measure 'Total Negatives' =
+			
+			CALCULATE(
+			    COUNTROWS(fact_nbotrainall),
+			    fact_nbotrainall[TARGET] = 0,
+			    ALLEXCEPT(fact_nbotrainall, fact_nbotrainall[MODEL_TYPE])
+			)
+		formatString: 0
+		displayFolder: Churn metrics
+		lineageTag: 233f33da-584c-4cf6-b200-0a1ed9e69f2a
+
+	measure 'Running FPR' =
+			
+			DIVIDE(
+			    [Running FP],
+			    [Total Negatives],
+			    0
+			)
+		displayFolder: Churn metrics
+		lineageTag: 0d0aa138-4463-4e5c-bf6f-7e8cdfa32194
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure AUC =
+			
+			VAR Points =
+			    SUMMARIZE(
+			        fact_nbotrainall,
+			        fact_nbotrainall[Decile],
+			        "TPR", [Running Recall],
+			        "FPR", [Running FPR]
+			    )
+			
+			VAR PointsWithIndex =
+			    ADDCOLUMNS(
+			        Points,
+			        "NextFPR",
+			            CALCULATE(
+			                MINX(
+			                    FILTER(
+			                        Points,
+			                        fact_nbotrainall[Decile] > EARLIER(fact_nbotrainall[Decile])
+			                    ),
+			                    [FPR]
+			                )
+			            ),
+			        "NextTPR",
+			            CALCULATE(
+			                MINX(
+			                    FILTER(
+			                        Points,
+			                        fact_nbotrainall[Decile] > EARLIER(fact_nbotrainall[Decile])
+			                    ),
+			                    [TPR]
+			                )
+			            )
+			    )
+			
+			RETURN
+			SUMX(
+			    PointsWithIndex,
+			    VAR x1 = [FPR]
+			    VAR x2 = [NextFPR]
+			    VAR y1 = [TPR]
+			    VAR y2 = [NextTPR]
+			    RETURN
+			        IF(
+			            NOT(ISBLANK(x2)),
+			            (x2 - x1) * (y1 + y2) / 2,
+			            0
+			        )
+			)
+		displayFolder: Churn metrics
+		lineageTag: 2c6273a2-876a-46f2-b6f8-2d05c0a7960e
 
 	partition Mesures = m
 		mode: import

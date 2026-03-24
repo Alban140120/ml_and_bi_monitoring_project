@@ -1,0 +1,50 @@
+table Paramètre
+	lineageTag: 969e0013-51f3-4e09-801d-33da9b7eb234
+
+	column Paramètre
+		lineageTag: f5ef5624-630a-4fb2-9cec-56001a21593d
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Paramètre Commande'
+
+		relatedColumnDetails
+			groupByColumn: 'Paramètre Champs'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Paramètre Champs'
+		isHidden
+		lineageTag: 75b0323f-adf0-4af2-b202-2230f81fee0d
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Paramètre Commande'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Paramètre Commande'
+		isHidden
+		formatString: 0
+		lineageTag: 334133e9-58bb-4021-818d-622b964cebd9
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Paramètre = calculated
+		mode: import
+		source =
+				{
+				    ("Running F1Score", NAMEOF('Mesures'[Running F1Score]), 0),
+				    ("Running Lift", NAMEOF('Mesures'[Running Lift]), 1),
+				    ("Running Precision", NAMEOF('Mesures'[Running Precision]), 2),
+				    ("Running Recall", NAMEOF('Mesures'[Running Recall]), 3)
+				}
+
+	annotation PBI_Id = 11f32c3da33942dbb00756a7d41263bc
+
