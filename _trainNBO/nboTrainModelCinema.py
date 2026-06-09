@@ -205,6 +205,10 @@ pip install imblearn
 
 # COMMAND ----------
 
+pip install shap
+
+# COMMAND ----------
+
 import pandas as pd
 import numpy as np
 from xgboost import XGBClassifier
