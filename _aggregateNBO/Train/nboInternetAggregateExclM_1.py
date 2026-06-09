@@ -129,60 +129,57 @@ from dateutil.relativedelta import relativedelta
 
 def process_l3m_internet(df_internet: DataFrame, n_months: int = 3) -> DataFrame:
     """
-    Calcule les métriques L3M par CUST_NUM et WEBSITE_TYPE avec pivot, rank et noms de colonnes standardisés.
-    
-    Args:
-        df_internet (DataFrame): DataFrame Internet avec EVT_DT et DURATION_INTERNET
-        n_months (int): nombre de mois à prendre en compte pour L3M (default=3)
-    
-    Returns:
-        DataFrame: métriques pivotées et renommées
+    Calcule les métriques L3M par CUST_NUM et WEBSITE_TYPE avec pivot, rank et noms de colonnes Delta-safe.
     """
-
     # Date max
     date_max = df_internet.agg(F.max("EVT_DT")).first()[0]
 
-    # Liste des derniers n_months
+    # Derniers n_months à inclure
     month_year_l3m = [
         ((date_max - relativedelta(months=i)).month, (date_max - relativedelta(months=i)).year)
         for i in range(n_months)
     ]
 
-    # Filtrer sur ces mois
-    df_internet = df_internet.filter(
-        struct("MONTH", "YEAR").isin([struct(lit(m), lit(y)) for m, y in month_year_l3m])
-    )
+    # Ajouter colonnes temporaires pour filtrer
+    df_internet = df_internet.withColumn("_year_tmp", F.year("EVT_DT")) \
+                             .withColumn("_month_tmp", F.month("EVT_DT"))
 
-    # Agrégation
-    df_agg = df_internet.groupBy("CUST_NUM", "WEBSITE_TYPE", "MONTH", "YEAR").agg(
+    # Filtrer sur les derniers n_months
+    condition = F.lit(False)
+    for m, y in month_year_l3m:
+        condition = condition | ((col("_year_tmp") == y) & (col("_month_tmp") == m))
+    df_filtered = df_internet.filter(condition).drop("_year_tmp", "_month_tmp")
+
+    # Agrégation par CUST_NUM et WEBSITE_TYPE
+    df_agg = df_filtered.groupBy("CUST_NUM", "WEBSITE_TYPE").agg(
         F.sum("DURATION_INTERNET").alias("DURATION_L3M"),
         F.countDistinct("EVT_DT").alias("NB_DAYS_USAGE_L3M")
     )
 
-    # Rank par catégorie
-    window_spec = Window.partitionBy("WEBSITE_TYPE", "MONTH", "YEAR").orderBy("DURATION_L3M")
+    # Rank par WEBSITE_TYPE
+    window_spec = Window.partitionBy("WEBSITE_TYPE").orderBy(col("DURATION_L3M").desc())
     df_agg = df_agg.withColumn("PERCENT_RANK", percent_rank().over(window_spec)) \
                    .withColumn("INTERNET_RANK", (col("PERCENT_RANK") * 99 + 1).cast("int")) \
                    .drop("PERCENT_RANK")
 
     # Pivot
-    df_pivot = df_agg.groupBy("CUST_NUM", "MONTH", "YEAR").pivot("WEBSITE_TYPE").agg(
+    df_pivot = df_agg.groupBy("CUST_NUM").pivot("WEBSITE_TYPE").agg(
         F_max("DURATION_L3M"),
         F_max("NB_DAYS_USAGE_L3M"),
         F_max("INTERNET_RANK")
     )
 
-    # Renommer colonnes pour correspondre à ton ancien standard
+    # Renommer colonnes pour Delta-safe
     renamed_columns = []
     for c in df_pivot.columns:
-        if c in ["CUST_NUM", "MONTH", "YEAR"]:
+        if c == "CUST_NUM":
             continue
         if "_max(DURATION_L3M)" in c:
             cat = c.replace("_max(DURATION_L3M)", "")
             new_col = f"INTERNET_DURATION_{cat}_L3M_SECONDES"
         elif "_max(NB_DAYS_USAGE_L3M)" in c:
             cat = c.replace("_max(NB_DAYS_USAGE_L3M)", "")
-            new_col = f"INTERNET_DURATION_{cat}_L3M_DAYS"
+            new_col = f"INTERNET_DURATION_{cat}_L3M_JOURS"
         elif "_max(INTERNET_RANK)" in c:
             cat = c.replace("_max(INTERNET_RANK)", "")
             new_col = f"INTERNET_RANK_{cat}_L3M"

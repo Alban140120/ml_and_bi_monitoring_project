@@ -248,6 +248,26 @@ model_sport = XGBClassifier(
 )
 model_sport.fit(X_train_res, y_train_res)
 
+import shap
+
+# Explainer SHAP
+explainer = shap.TreeExplainer(model_sport)
+
+# Calcul SHAP sur l'échantillon de train
+shap_values = explainer.shap_values(X_train_res)
+
+# Importance moyenne absolue
+shap_importance = pd.DataFrame({
+    "FEATURE": feature_cols,
+    "IMPORTANCE": np.abs(shap_values).mean(axis=0)
+})
+
+# Tri décroissant
+shap_importance = shap_importance.sort_values(
+    by="IMPORTANCE",
+    ascending=False
+)
+
 # 4. Wrapper pour forcer le modèle à renvoyer les probabilités
 class XGBProbaWrapper(mlflow.pyfunc.PythonModel):
     def __init__(self, model):
@@ -293,6 +313,34 @@ ordered_cols = (
     + [col for col in feature_cols if col in df_final.columns]
 )
 df_final = df_final[ordered_cols]
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC SHAP importance
+
+# COMMAND ----------
+
+from datetime import datetime
+
+shap_importance["MODEL"] = "SPORT"
+shap_importance["TRAINING_DATE"] = datetime.today().date()
+
+# COMMAND ----------
+
+shap_spark = spark.createDataFrame(shap_importance)
+
+# COMMAND ----------
+
+shap_spark.write \
+    .format("delta") \
+    .mode("append") \
+    .saveAsTable("feature_importance_sport")
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC ML flow
 
 # COMMAND ----------
 
